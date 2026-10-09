@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { footerData } from '../../data/siteData';
+import logo from '../../assets/logos/logo-mejor-internet.png';
 import { sendLead, isValidPhone } from '../../services/leadService';
-import ImagePlaceholder from '../ui/ImagePlaceholder';
-
-// PIE DE PÁGINA responsive.
-// Celular: todo apilado y centrado. PC (md+): logo a la izquierda y formulario a la derecha.
-// GUÍA: ancho del bloque derecho md:w-[600px] · ancho del input md:w-[290px]
 
 function Footer() {
   const [phone, setPhone] = useState('');
@@ -14,14 +10,13 @@ function Footer() {
   const handleCall = async () => {
     if (!isValidPhone(phone)) return setMessage('Ingresa un número de 9 dígitos.');
     const result = await sendLead({ phone, acceptedPrivacy: true, source: 'footer' });
-    setMessage(result.ok ? 'Gracias, te llamaremos.' : result.message ?? 'Error al enviar.');
+<img src={logo} alt="Mejor Internet" className="h-10 w-28 object-contain md:h-16 md:w-36" />
   };
 
   return (
     <footer className="relative z-10 -mt-12 rounded-t-[40px] bg-dark px-6 pb-10 pt-10 text-white md:-mt-24 md:px-[4.3%] md:pt-16">
       <div className="flex flex-col gap-8 md:flex-row md:justify-between">
-        {/* TODO: REEMPLAZAR POR LOGO ORIGINAL -> src/assets/logos/logo-mejor-internet-white.png */}
-        <ImagePlaceholder name="logo-footer" className="h-16 w-40 md:h-20 md:w-48" />
+        <img src={logo} alt="Mejor Internet" className="h-10 w-28 object-contain md:h-16 md:w-36" />
 
         <div className="w-full text-center md:w-[600px] md:text-right">
           <p className="text-xl font-bold md:text-2xl">Te informamos</p>
@@ -38,9 +33,9 @@ function Footer() {
             <button
               type="button"
               onClick={handleCall}
-              className="mx-auto mt-4 block rounded-full bg-white px-6 py-1.5 text-sm font-semibold text-purple"
+              className="mt-6 mx-auto block rounded-full bg-white px-10 py-3 text-base font-bold uppercase text-purple shadow-md transition duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-purple hover:text-white hover:shadow-[0_12px_24px_rgba(138,56,245,0.5)] active:scale-95"
             >
-              LLAMANOS
+              Llamanos
             </button>
             {message && <p className="mt-2 text-xs">{message}</p>}
           </div>

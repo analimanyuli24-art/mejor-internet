@@ -1,10 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import CallRequestModal from './CallRequestModal';
 
-// CONTROL GLOBAL DEL MODAL "¡Buena elección!"
-// Cualquier botón de la página ("Saber más", "Solicitar más información")
-// llama openCallRequest(). Así no hay que pasar props por toda la página.
-
 interface CallRequestContextValue {
   openCallRequest: (planId?: string) => void;
 }

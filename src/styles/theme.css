@@ -18,6 +18,23 @@
 }
 
 @layer base {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+  }
+
+  #root {
+    max-width: none;
+    text-align: left;
+  }
+
   body {
     @apply bg-white font-sans text-dark antialiased;
   }

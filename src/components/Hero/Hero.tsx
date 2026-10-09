@@ -1,48 +1,52 @@
 import { heroData } from '../../data/siteData';
-import ImagePlaceholder from '../ui/ImagePlaceholder';
+import heroImage from '../../assets/images/hero-image.png';
+import movilBadge from '../../assets/images/badge-movil.png';
 import HeroLeadForm from './HeroLeadForm';
-import PriceBadge from './PriceBadge';
 
-// SECCIÓN INICIAL responsive.
-// Celular: todo en una columna, textos y burbujas más chicos.
-// PC (lg+): 3 columnas. En PC el contenido se acomoda desde abajo.
-// GUÍA PC:
-// - md:pb-20 = distancia del contenido al borde inferior (más = el contenido sube, menos = baja)
-// - md:min-h-[960px] = altura total del hero (más = la imagen baja)
+// SECCIÓN INICIAL fluida: todos los textos y burbujas se adaptan al ancho de la pantalla.
+// Celular: una columna. PC (lg+): tres columnas.
+// GUÍA:
+// - TÍTULO: text-[clamp(44px,8vw,108px)] (más grande = sube el 108)
+// - SUBTÍTULO: text-[clamp(16px,1.6vw,30px)]
+// - ALTURA PC: md:min-h-[860px] · distancia del contenido al borde: md:pb-12
+// - BURBUJAS: una sola imagen (badge-movil.png) con las dos burbujas.
+// - Posición en celular: top (abajo/arriba) y left (derecha/izquierda) en las clases "relative".
 
 function Hero() {
   return (
-    <section className="relative isolate flex min-h-[600px] flex-col overflow-hidden rounded-b-[40px] pb-10 pt-[120px] text-white md:min-h-[960px] md:pb-37 md:pt-[260px]">
-      {/* TODO: REEMPLAZAR POR IMAGEN DE FONDO -> src/assets/images/hero-image.jpg */}
-      <ImagePlaceholder name="hero-image" className="absolute inset-0 -z-10 bg-dark" />
+    <section className="relative isolate flex min-h-[600px] flex-col overflow-hidden rounded-b-[40px] pb-10 pt-[120px] text-white md:min-h-[860px] md:pb-12 md:pt-[260px]">
+      <img src={heroImage} alt="" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
 
       <div className="grid grid-cols-1 items-end gap-8 px-[4.3%] md:mt-auto lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:gap-10">
         {/* COLUMNA IZQUIERDA: título, subtítulo y pill */}
-        <div>
+        <div className="mb-[clamp(20px,10vw,80px)]">
           <h1 className="text-[clamp(44px,8vw,108px)] font-semibold leading-[0.92] drop-shadow-[0_4px_14px_rgba(0,0,0,0.35)]">
             {heroData.title.map((line) => (
               <span key={line} className="block whitespace-nowrap">{line}</span>
             ))}
           </h1>
-          <p className="mt-5 max-w-lg text-base leading-snug md:text-3xl">{heroData.subtitle}</p>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-dark px-4 py-2 text-sm font-semibold md:mt-6 md:gap-3 md:px-6 md:py-3 md:text-xl">
-            <span className="h-2.5 w-2.5 animate-[pulse-dot_1.5s_ease-in-out_infinite] rounded-full bg-green md:h-3 md:w-3" />
+          <p className="mt-[clamp(12px,1.5vw,24px)] max-w-lg text-[clamp(16px,1.6vw,30px)] leading-snug">
+            {heroData.subtitle}
+          </p>
+          <div className="mt-[clamp(12px,1.5vw,24px)] inline-flex items-center gap-[clamp(6px,0.6vw,12px)] rounded-full bg-dark px-[clamp(14px,1.2vw,24px)] py-[clamp(7px,0.7vw,12px)] text-[clamp(12px,1.1vw,20px)] font-semibold">
+            <span className="h-[clamp(8px,0.7vw,12px)] w-[clamp(8px,0.7vw,12px)] animate-[pulse-dot_1.5s_ease-in-out_infinite] rounded-full bg-green" />
             {heroData.liveLabel}
           </div>
         </div>
 
-        {/* COLUMNA CENTRAL: burbujas de precio */}
-        <div className="flex items-end justify-center pb-2 md:pb-6">
-          {heroData.badges.map((badge, index) => (
-            <div key={badge.label} className={index > 0 ? '-ml-3 md:-ml-6' : ''}>
-              <PriceBadge label={badge.label} price={badge.price} />
-            </div>
-          ))}
+        {/* COLUMNA CENTRAL: burbujas de precio (una sola imagen) */}
+        <div className="relative top-25 left-0 flex items-end justify-center pb-2 md:top-0 md:left-0 md:pb-6">
+          <img
+            src={movilBadge}
+            alt=""
+            aria-hidden="true"
+            className="w-[clamp(220px,30vw,460px)] object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)]"
+          />
         </div>
 
         {/* COLUMNA DERECHA: formulario */}
-        <div className="flex justify-center lg:self-center">
+        <div className="relative top-15 -left-4 flex origin-top scale-90 justify-center md:top-0 md:left-0 md:scale-100 lg:self-center">
           <HeroLeadForm />
         </div>
       </div>

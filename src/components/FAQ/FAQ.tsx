@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { faqData } from '../../data/faqData';
 import FAQItem from './FAQItem';
 
-// SECCIÓN "RESOLVEMOS TUS DUDAS". Solo una pregunta abierta a la vez.
-
 function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

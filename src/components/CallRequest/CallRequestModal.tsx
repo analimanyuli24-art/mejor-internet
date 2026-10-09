@@ -3,15 +3,6 @@ import { sendLead, isValidPhone } from '../../services/leadService';
 import Button from '../ui/Button';
 import SuccessMessage from './SuccessMessage';
 
-// MODAL "¡Buena elección!": pide el número para que un asesor llame.
-// El envío real está en services/leadService.ts (no aquí).
-//
-// GUÍA DE AJUSTES:
-// - ANCHO: max-w-lg (más grande = max-w-xl o max-w-2xl)
-// - TÍTULO: text-4xl | TEXTOS: text-base / text-lg
-// - CAMPO DE TELÉFONO: h-14 (alto) y text-lg (letra)
-// - BOTÓN: size="lg" (más grande = "xl")
-
 interface CallRequestModalProps {
   isOpen: boolean;
   planId?: string;
@@ -46,14 +37,14 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={handleClose}>
       <div
-        className="relative w-full max-w-lg animate-[modal-in_0.3s_ease-out] rounded-[28px] bg-dark p-8 text-white"
+        className="relative w-full max-w-[340px] animate-[modal-in_0.3s_ease-out] rounded-[24px] bg-dark p-5 text-white md:max-w-lg md:rounded-[28px] md:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={handleClose}
           aria-label="Cerrar"
-          className="absolute right-5 top-5 text-2xl text-white/70 hover:text-white"
+          className="absolute right-4 top-4 text-2xl text-white/70 hover:text-white md:right-5 md:top-5"
         >
           ✕
         </button>
@@ -87,7 +78,7 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
               <Button size="lg" onClick={handleSubmit}>Solicitar llamada</Button>
             </div>
 
-            <div className="-mx-8 -mb-8 mt-7 rounded-b-[28px] bg-lavender px-8 py-5 text-center text-base text-dark">
+            <div className="-mx-5 -mb-5 mt-7 rounded-b-[24px] bg-lavender px-5 py-5 text-center text-base text-dark md:-mx-8 md:-mb-8 md:rounded-b-[28px] md:px-8 md:py-5">
               <p className="font-semibold">¿Te gustaría conversar ahora mismo?</p>
               <p>
                 Llámanos al <b>01 7012004</b> y uno de nuestros asesores te atenderá con gusto.

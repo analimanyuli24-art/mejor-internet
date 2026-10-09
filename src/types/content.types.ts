@@ -9,9 +9,12 @@ export interface PlanCardData {
   bullets?: string[];        // lista con viñeta (llamadas, roaming, etc.)
   oldGb?: string;            // GB tachado (bono promocional)
   price: string;             // ej. "S/27.90"
-  iconKey: string;           // clave del ícono/imagen en ImagePlaceholder
+  iconKey: string;  
+  logos?: string[];
+  channels?: string[];
+  devices?: string[];         // clave del ícono/imagen en ImagePlaceholder
+  compact?: boolean;
 }
-
 export interface FAQItem {
   question: string;
   answer: string;
