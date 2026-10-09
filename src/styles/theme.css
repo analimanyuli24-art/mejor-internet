@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/*
+  PALETA DEL SITIO
+  // CAMBIAR PALETA AQUÍ: estos valores se convierten en clases de Tailwind
+  // (ej. bg-purple, text-dark, bg-lavender) en todo el proyecto.
+*/
+@theme {
+  --color-lavender: #c2bdfa; /* fondo de "Elige tu plan" y FAQ */
+  --color-green: #00ff09;    /* punto de "Asesores en línea" */
+  --color-dark: #1d0b33;     /* tarjetas, footer, formulario del hero */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-purple: #8a38f5;   /* botones "Saber más", tab activo, "Llamanos" */
+
+  /* TIPOGRAFÍA: // CAMBIAR FUENTE AQUÍ cuando se defina la oficial */
+  --font-sans: "DM Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white font-sans text-dark antialiased;
+  }
+}
+
+/* Ticker de la barra superior: // AJUSTAR VELOCIDAD AQUÍ (duración en 'ticker-scroll' de TopTicker) */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.3333%); }
+}
+
+/* Parpadeo del punto verde "Asesores en línea" */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Entrada del modal */
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
