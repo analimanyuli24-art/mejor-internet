@@ -1,41 +1,46 @@
+import axios from 'axios';
 import type { LeadData, LeadResult } from '../types/lead.types';
 
-// ============================================================
-// ÚNICO LUGAR DONDE SE CONECTA EL ENVÍO DE FORMULARIOS
-// Todos los formularios (hero, modal "Saber más", footer, FAQ)
-// llaman a sendLead(). Cuando la empresa dé su servicio,
-// reemplaza SOLO el contenido de esta función.
-// ============================================================
+const IP_ENDPOINT = 'https://api.ipify.org?format=json';
+const QUEUE_ID = '1';
 
-// TODO: CONECTAR AQUÍ AL SERVICIO DE LA EMPRESA
-// Endpoint, método y formato de datos se definen cuando la empresa los entregue.
-const LEAD_ENDPOINT = ''; // TODO: AGREGAR URL DEL SERVICIO DE LA EMPRESA
-
-export async function sendLead(data: LeadData): Promise<LeadResult> {
-  // Mientras no exista endpoint, solo registramos el envío para probar la interfaz.
-  if (!LEAD_ENDPOINT) {
-    console.info('[leadService] Envío simulado (sin endpoint):', data);
-    return { ok: true };
-  }
-
-  try {
-    const response = await fetch(LEAD_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      return { ok: false, message: 'No se pudo enviar tu solicitud. Intenta de nuevo.' };
+async function getClientIp(): Promise<string> {
+    try {
+        const { data } = await axios.get<{ ip: string }>(IP_ENDPOINT);
+        return data.ip ?? '';
+    } catch {
+        return '';
     }
-    return { ok: true };
-  } catch {
-    return { ok: false, message: 'Error de conexión. Intenta de nuevo.' };
-  }
 }
 
-// Valida el número peruano sin anteponer el (51): 9 dígitos que empiezan en 9 o en 01 fijo.
-// TODO: CONFIRMAR REGLA DE VALIDACIÓN CON LA EMPRESA
+export async function sendLead(data: LeadData): Promise<LeadResult> {
+    try {
+        const ip = await getClientIp();
+
+        await axios.post('https://crm.develz.com:4004/call-me', {
+            queueId: QUEUE_ID,
+            number:data.phone,
+            ip,
+            },
+            {
+                headers: {
+                    'X-URL-Complete': window.location.href,
+                },
+            },
+        );
+
+        return { ok: true };
+    } catch (error) {
+        const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+        return {
+            ok: false,
+            message: status
+                ? `Error del servidor (${status})`
+                : 'No se pudo conectar. Intenta de nuevo.',
+        };
+    }
+}
+
 export function isValidPhone(phone: string): boolean {
-  return /^\d{9}$/.test(phone.trim());
+    return /^\d{9}$/.test(phone);
 }

@@ -3,17 +3,12 @@ import { useCallRequest } from '../CallRequest/CallRequestContext';
 import { getIconSrc, getLogoSrc } from '../../utils/getIconSrc';
 import Button from '../ui/Button';
 
-// TARJETA DE PLAN responsive.
-// Celular: textos y precio más chicos · PC (md/xl): tamaños normales.
-// IMAGEN: "logos" arriba · "channels" en cuadrícula 2x2 · "devices" al lado de los canales.
-// "compact: true" en el plan usa imágenes más chicas solo para ese cuadro.
-
 // CUADRO de cada canal (tamaño fijo).
 const channelSizes: Record<string, string> = {
-  'logo-disney': 'h-20 w-20 md:h-24 md:w-24',
-  'logo-espa': 'h-20 w-20 md:h-24 md:w-24',
-  'logo-sony': 'h-20 w-20 md:h-24 md:w-24',
-  'logo-warner': 'h-20 w-20 md:h-24 md:w-24',
+  'logo-disney': 'h-14 w-14 md:h-16 md:w-16',
+  'logo-espa': 'h-14 w-14 md:h-16 md:w-16',
+  'logo-sony': 'h-14 w-14 md:h-16 md:w-16',
+  'logo-warner': 'h-14 w-14 md:h-16 md:w-16',
 };
 
 // ZOOM de la imagen dentro de su cuadro: scale-90 la aleja, scale-110 la acerca.
@@ -45,14 +40,14 @@ function PlanCard({ plan }: PlanCardProps) {
   const small = Boolean(plan.compact);
 
   return (
-    <article className="flex h-[540px] w-full flex-col items-center rounded-[36px] bg-dark px-5 pb-10 pt-6 text-center text-white shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition duration-300 hover:shadow-[0_28px_50px_rgba(0,0,0,0.45)] md:h-[680px] xl:h-[625px] md:rounded-[56px] md:px-[7%] md:py-[6%]">
-      {/* BADGE: celular text-base · PC text-2xl */}
-      <span className="inline-flex w-[85%] items-center justify-center rounded-full bg-purple px-4 py-1 text-center text-base font-bold leading-tight md:text-2xl 2xl:text-4xl">
+    <article className="flex min-h-[400px] w-full flex-col items-center rounded-[24px] bg-dark px-4 pb-6 pt-5 text-center text-white shadow-[0_12px_28px_rgba(0,0,0,0.35)] transition duration-300 hover:shadow-[0_18px_34px_rgba(0,0,0,0.45)] md:min-h-[440px] xl:min-h-[430px] md:rounded-[32px] md:px-[6%] md:py-[4%]">
+      {/* BADGE: celular text-xs · PC text-lg */}
+      <span className="inline-flex w-[85%] items-center justify-center rounded-full bg-purple px-3 py-1 text-center text-xs font-bold leading-tight md:text-lg 2xl:text-xl">
         {plan.badge}
       </span>
 
-      {/* DESCRIPCIÓN: celular text-sm · PC text-xl */}
-      <div className="mt-4 space-y-1 text-sm leading-snug md:mt-[8%] md:text-xl 2xl:text-2xl">
+      {/* DESCRIPCIÓN: celular text-xs · PC text-base */}
+      <div className="mt-3 space-y-0.5 text-xs leading-snug md:mt-[6%] md:text-base 2xl:text-lg">
         {plan.oldGb && gbLineIndex === -1 && (
           <p className="font-semibold line-through decoration-2">{plan.oldGb}</p>
         )}
@@ -66,8 +61,8 @@ function PlanCard({ plan }: PlanCardProps) {
         ))}
       </div>
 
-      {/* BULLETS: celular text-sm · PC text-xl */}
-      <div className="mt-3 space-y-1 text-sm md:text-xl">
+      {/* BULLETS: celular text-xs · PC text-base */}
+      <div className="mt-2 space-y-0.5 text-xs md:text-base">
         {plan.bullets?.map((bullet) => (
           <p key={bullet}>• {bullet}</p>
         ))}
@@ -75,26 +70,26 @@ function PlanCard({ plan }: PlanCardProps) {
 
       {/* IMAGEN: logos, canales y router, o ícono del plan */}
       {hasImages ? (
-        <div className={`my-4 flex flex-col items-center md:my-auto ${small ? 'gap-1' : 'gap-3'}`}>
+        <div className={`my-3 flex flex-col items-center md:my-auto ${small ? 'gap-1' : 'gap-2'}`}>
           {logoSrcs.map((src) => (
             <img
               key={src}
               src={src}
               alt=""
               aria-hidden="true"
-              className={`w-auto object-contain ${small ? 'max-h-[40px] md:max-h-[64px]' : 'max-h-[70px] md:max-h-[110px]'}`}
+              className={`w-auto object-contain ${small ? 'max-h-[28px] md:max-h-[40px]' : 'max-h-[44px] md:max-h-[60px]'}`}
             />
           ))}
           {(channelSrcs.length > 0 || deviceSrcs.length > 0) && (
-            <div className="flex items-center justify-center gap-3 md:gap-4">
+            <div className="flex items-center justify-center gap-2 md:gap-3">
               {channelSrcs.length > 0 && (
-                <div className="grid grid-cols-2 gap-2 md:gap-3">
+                <div className="grid grid-cols-2 gap-1.5 md:gap-2">
                   {(plan.channels ?? []).map((name) => {
                     const src = getLogoSrc(name);
                     return src ? (
                       <div
                         key={name}
-                        className={`overflow-hidden rounded-2xl shadow-md ${small ? 'h-10 w-10 md:h-16 md:w-16' : channelSizes[name] ?? 'h-20 w-20 md:h-24 md:w-24'}`}
+                        className={`overflow-hidden rounded-xl shadow-md ${small ? 'h-8 w-8 md:h-10 md:w-10' : channelSizes[name] ?? 'h-14 w-14 md:h-16 md:w-16'}`}
                       >
                         <img
                           src={src}
@@ -113,7 +108,7 @@ function PlanCard({ plan }: PlanCardProps) {
                   src={src}
                   alt=""
                   aria-hidden="true"
-                  className={`w-auto object-contain ${small ? 'max-h-[64px] md:max-h-[110px]' : 'max-h-[110px] md:max-h-[150px]'}`}
+                  className={`w-auto object-contain ${small ? 'max-h-[44px] md:max-h-[60px]' : 'max-h-[60px] md:max-h-[80px]'}`}
                 />
               ))}
             </div>
@@ -125,20 +120,21 @@ function PlanCard({ plan }: PlanCardProps) {
             src={iconSrc}
             alt=""
             aria-hidden="true"
-            className="mx-auto mt-15 mb-4 h-[150px] w-auto max-w-full object-contain md:my-auto md:h-[170px]"
+            className="mx-auto mt-6 mb-3 h-[80px] w-auto max-w-full object-contain md:my-auto md:h-[96px]"
           />
         )
       )}
 
-      {/* PRECIO: celular text-3xl · PC text-6xl. Siempre alineado abajo. */}
-      <p className="mt-auto pt-4 text-3xl font-bold md:text-6xl">
-        {plan.price}
-        <span className="text-sm font-normal md:text-base">/mes</span>
-      </p>
+      {/* PRECIO + BOTÓN: van juntos al fondo, así quedan alineados en todas las tarjetas */}
+      <div className="mt-auto flex w-full flex-col items-center">
+        <p className="pt-2 text-2xl font-bold md:text-4xl">
+          {plan.price}
+          <span className="text-xs font-normal md:text-sm">/mes</span>
+        </p>
 
-      {/* BOTÓN: mb-6 lo sube para que quede dentro de la tarjeta */}
-      <div className="mt-5 mb-6 md:mt-[6%]">
-        <Button size="xl" onClick={() => openCallRequest(plan.id)}>Saber más</Button>
+        <div className="mt-3 mb-4 md:mt-[4%]">
+          <Button size="xl" onClick={() => openCallRequest(plan.id)}>Saber más</Button>
+        </div>
       </div>
     </article>
   );

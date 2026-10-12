@@ -1,11 +1,6 @@
 import type { AdvantageData } from '../../types/content.types';
 import { getIconSrc } from '../../utils/getIconSrc';
 
-// UNA VENTAJA: ícono + título morado + texto.
-// ÍCONO: src/assets/icons/ según advantage.iconKey.
-// TAMAÑO DEL ÍCONO: cambia h-[clamp(...)] y w-[clamp(...)].
-// TÍTULO: text-2xl (celular) / md:text-3xl (PC)
-
 interface AdvantageItemProps {
   advantage: AdvantageData;
 }
@@ -20,11 +15,11 @@ function AdvantageItem({ advantage }: AdvantageItemProps) {
           src={iconSrc}
           alt=""
           aria-hidden="true"
-          className="h-[clamp(72px,6vw,96px)] w-[clamp(72px,6vw,96px)] object-contain"
+          className="h-[clamp(56px,4.5vw,72px)] w-[clamp(56px,4.5vw,72px)] object-contain"
         />
       )}
-      <h3 className="mt-6 text-2xl font-bold text-purple md:text-3xl">{advantage.title}</h3>
-      <p className="mt-3 max-w-xs text-base md:text-xl">{advantage.description}</p>
+      <h3 className="mt-4 text-[clamp(16px,1.6vw,24px)] font-bold text-purple">{advantage.title}</h3>
+      <p className="mt-2 max-w-xs text-[clamp(12px,1.2vw,16px)]">{advantage.description}</p>
     </div>
   );
 }

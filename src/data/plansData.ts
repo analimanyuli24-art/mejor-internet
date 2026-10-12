@@ -19,7 +19,7 @@ export const plansTabs: PlanTab[] = [
         badge: '¡MEJOR PRECIO!',
         description: ['300 MBPS DE VELOCIDAD'],
         price: 'S/59.90',
-        iconKey: 'icono-1',
+        iconKey: 'icono-2',
       },
             {
         id: 'internet-mas-velocidad',
@@ -52,7 +52,7 @@ export const plansTabs: PlanTab[] = [
         description: ['600 MBPS DE VELOCIDAD.'],
         bullets: ['2 puntos de TV Digital', '100 canales incluidos'],
         price: 'S/79.90',
-        iconKey: 'icono-2',
+        iconKey: 'icono-3',
       },
             {
         id: 'tv-todo-en-uno',
@@ -91,7 +91,7 @@ export const plansTabs: PlanTab[] = [
         description: ['INTERNET ILIMITADO', '125 GB DE ALTA VELOCIDAD'],
         bullets: ['Llamadas y SMS ilimitados'],
         price: 'S/27.90',
-        iconKey: 'icono-3',
+        iconKey: 'icono-1',
       },
             {
         id: 'movil-mas-completa',
