@@ -1,22 +1,25 @@
 import { introData } from '../../data/siteData';
 
 // TEXTO INTRODUCTORIO responsive.
-// GUÍA: tamaño del título text-[clamp(18px,2.6vw,34px)]
-//       (más grande = sube el 34, más chico = baja el 18)
-// md:whitespace-nowrap = en tablet y PC el título va en una sola línea.
-// md:block = en tablet y PC cada línea del párrafo va en su propia fila.
-// Si cambias el texto en siteData, actualiza también estas 3 líneas.
+// CELULAR: sin cambios.
+// TABLET Y PC (md+): todo en vw, sin mínimo ni máximo.
+// GUÍA: más grande = sube el número vw del md.
 
 function Intro() {
   return (
-    <section className="mx-[2%] px-4 pt-8 text-center md:pt-12">
-      <h2 className="mx-auto text-[clamp(18px,2.6vw,34px)] font-semibold leading-tight md:whitespace-nowrap">
+    <section className="mx-[2%] px-4 pt-6 text-center md:pt-[2.5vw]">
+      <h2 className="whitespace-nowrap text-[clamp(10px,3.1vw,13px)] font-semibold leading-tight md:text-[2.6vw]">
         {introData.title}
       </h2>
-      <p className="mx-auto mt-4 text-sm md:text-base">
-        <span className="md:block">Deja de pagar de más por tu internet de casa o línea móvil.</span>{' '}
-        <span className="md:block">Filtramos las mejores opciones del mercado peruano para que</span>{' '}
-        <span className="md:block">empieces a ahorrar hoy.</span>
+           <p className="mx-auto mt-3 text-[11px] leading-snug md:mt-[1vw] md:text-[max(14px,1.5vw)] lg:text-[max(16px,1.2vw)]">
+        {/* CELULAR */}
+        <span className="block md:hidden">Deja de pagar de más por tu internet de casa o línea móvil.</span>
+        <span className="block md:hidden">Filtramos las mejores opciones del mercado peruano</span>
+        <span className="block md:hidden">para que empieces a ahorrar hoy.</span>
+        {/* PC */}
+        <span className="hidden md:block">Deja de pagar de más por tu internet de casa o línea móvil.</span>
+        <span className="hidden md:block">Filtramos las mejores opciones del mercado peruano para que</span>
+        <span className="hidden md:block">empieces a ahorrar hoy.</span>
       </p>
     </section>
   );

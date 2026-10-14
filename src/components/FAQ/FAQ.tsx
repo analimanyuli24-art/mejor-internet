@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { faqData } from '../../data/faqData';
 import FAQItem from './FAQItem';
 
-// GUÍA: título text-[clamp(18px,2.6vw,34px)] · lista max-w-3xl
+// GUÍA: título text-[clamp(18px,3vw,42px)] · lista max-w-3xl / md:max-w-4xl / lg:max-w-5xl
 // pb = espacio abajo antes del footer (más grande = más separación)
 
 function FAQ() {
@@ -10,10 +10,10 @@ function FAQ() {
 
   return (
     <section className="bg-lavender px-[4.3%] pb-24 pt-8 md:pb-40 md:pt-12">
-      <h2 className="text-center text-[clamp(18px,2.6vw,34px)] font-semibold leading-tight">
+      <h2 className="text-center text-[clamp(18px,3vw,42px)] font-semibold leading-tight">
         RESOLVEMOS TUS DUDAS
       </h2>
-      <div className="mx-auto mt-6 max-w-3xl md:mt-8">
+      <div className="mx-auto mt-6 max-w-3xl md:mt-8 md:max-w-4xl lg:max-w-5xl">
         {faqData.map((item, index) => (
           <FAQItem
             key={item.question}

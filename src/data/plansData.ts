@@ -70,7 +70,7 @@ export const plansTabs: PlanTab[] = [
         id: 'tv-mas-potencia',
         badge: '¡MÁS POTENCIA!',
         oldGb: '400 GB',
-        description: ['1000 GB A ALTA VELOCIDAD', '(BONO PROMOCIONAL)'],
+        description: ['1000 MBPS A ALTA VELOCIDAD', '(BONO PROMOCIONAL)'],
         bullets: ['105 canales HD', '2 decos incluidos', 'MESH- WIFI 360°'],
         price: 'S/114.00',
         iconKey: 'liga1max-universal-mesh',

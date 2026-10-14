@@ -2,8 +2,8 @@ import type { PlanTab } from '../../data/plansData';
 import type { PlanCategory } from '../../types/content.types';
 
 // TABS INTERNET / INTERNET+TV / MÓVIL.
-// Celular: 3 botones iguales en una fila. PC: pastillas centradas.
-// GUÍA: texto text-[clamp(11px,1.5vw,20px)] (más grande = sube el 20, más chico = baja el 11)
+// CELULAR: sin cambios.
+// TABLET Y PC (md+): todo en vw, sin mínimo ni máximo.
 
 interface PlanTabsProps {
   tabs: PlanTab[];
@@ -15,7 +15,7 @@ function PlanTabs({ tabs, activeId, onChange }: PlanTabsProps) {
   return (
     <div
       role="tablist"
-      className="grid w-full grid-cols-3 gap-1 rounded-full bg-white/80 p-[clamp(3px,0.4vw,8px)] md:flex md:w-auto md:flex-wrap md:justify-center md:gap-2"
+      className="mx-auto flex w-auto gap-0.5 rounded-full bg-white/80 p-0.5 md:flex-wrap md:justify-center md:gap-[0.4vw] md:p-[0.4vw]"
     >
       {tabs.map((tab) => {
         const isActive = tab.id === activeId;
@@ -25,7 +25,7 @@ function PlanTabs({ tabs, activeId, onChange }: PlanTabsProps) {
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
-            className={`rounded-full px-[clamp(2px,1vw,40px)] py-[clamp(6px,0.8vw,12px)] text-[clamp(11px,1.5vw,20px)] font-medium transition-all duration-300 ${
+            className={`rounded-full px-2.5 py-1 text-[8px] font-medium transition-all duration-300 md:px-[1vw] md:py-[0.8vw] md:text-[1.5vw] ${
               isActive ? 'bg-purple text-white' : 'text-dark hover:bg-lavender/60'
             }`}
           >

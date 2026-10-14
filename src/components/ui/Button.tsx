@@ -1,23 +1,27 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 // BOTONES DEL SITIO
-// variant "purple": "Saber más", "Llamanos", "Solicitar llamada"
+// variant "purple": "Saber más", "Llamanos", "Solicitar llamada" (hero y tarjetas)
+// variant "light":  botón blanco con letras moradas del modal "¡Buena elección!"
 // variant "dark":   "Solicitar más información" (FAQ)
-// size "md": normal · "lg": hero · "xl": botón "Saber más" de las tarjetas
+// size "sm": botón chico del formulario del hero en celular
+// size "md": normal · "lg": hero en tablet y PC · "xl": botón "Saber más" de las tarjetas
 // Ambos crecen un poco al pasar el mouse y se hunden al hacer clic.
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'purple' | 'dark';
-  size?: 'md' | 'lg' | 'xl';
+  variant?: 'purple' | 'light' | 'dark';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   children: ReactNode;
 }
 
 const variants = {
   purple: 'bg-purple text-white',
+  light: 'bg-white text-purple',
   dark: 'bg-dark text-white',
 };
 
 const sizes = {
+  sm: 'px-5 py-1.5 text-xs',
   md: 'px-5 py-2 text-sm',
   lg: 'px-10 py-3 text-lg',
   xl: 'px-16 py-2 text-2xl',
