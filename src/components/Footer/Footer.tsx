@@ -3,12 +3,6 @@ import { footerData } from '../../data/siteData';
 import footerLogo from '../../assets/logos/logo-mejor-internet-white.png';
 import { sendLead, isValidPhone } from '../../services/leadService';
 
-// CELULAR Y PC: logo a la izquierda y textos a la derecha.
-// El campo va al ras del texto de la derecha, con su tamaño original.
-// El botón va debajo del campo, con el mismo ancho.
-// BOTÓN: blanco con letras moradas; al pasar el mouse se vuelve morado con letras blancas.
-// GUÍA: celular logo h-[40px] w-[100px] · celular texto de la derecha w-[58%]
-
 function Footer() {
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');

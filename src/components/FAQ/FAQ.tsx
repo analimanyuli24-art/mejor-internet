@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { faqData } from '../../data/faqData';
 import FAQItem from './FAQItem';
 
-// GUÍA: título text-[clamp(18px,3vw,42px)] · lista max-w-3xl / md:max-w-4xl / lg:max-w-5xl
-// pb = espacio abajo antes del footer (más grande = más separación)
-
 function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

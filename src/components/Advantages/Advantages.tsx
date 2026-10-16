@@ -1,10 +1,6 @@
 import { advantagesData } from '../../data/advantagesData';
 import AdvantageItem from './AdvantageItem';
 
-// VENTAJAS: en celular 2 columnas · en PC 4 columnas.
-// ORDEN CELULAR: Instalación, Fibra, Cobertura 5G, Ahorro (solo celular, max-md).
-// TÍTULO: celular 12px · PC md:text-[clamp(24px,3.4vw,56px)]
-
 const mobileOrder: Record<string, string> = {
   'Instalación Gratuita': 'max-md:order-1',
   'La fibra más rápida': 'max-md:order-2',

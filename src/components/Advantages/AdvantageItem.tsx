@@ -1,11 +1,6 @@
 import type { AdvantageData } from '../../types/content.types';
 import { getIconSrc } from '../../utils/getIconSrc';
 
-// UNA VENTAJA: ícono + título morado + texto.
-// CELULAR: ícono 44px · título 10px · texto 9px (sin cambios).
-// TABLET (md): el título reserva espacio para 2 líneas, así todos los textos quedan alineados.
-// PC (lg+): ícono clamp(56px,4.5vw,72px) · título clamp(16px,1.6vw,24px) · texto clamp(12px,1.2vw,16px).
-
 interface AdvantageItemProps {
   advantage: AdvantageData;
 }

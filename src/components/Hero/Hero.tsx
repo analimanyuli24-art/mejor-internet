@@ -16,14 +16,14 @@ function Badge({ src }: { src: string }) {
 function Hero() {
   return (
     <div className="bg-white md:pb-[0.6vw]">
-      <section className="relative isolate flex aspect-[1919/820] max-md:aspect-auto max-md:min-h-[230px] w-full flex-col justify-center overflow-hidden rounded-b-[24px] px-[4%] text-white shadow-[0_6px_10px_rgba(0,0,0,0.25)] md:rounded-b-[2.1vw] md:px-0 md:shadow-none">
-        <img src={heroImage} alt="" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_40%] max-md:-top-[40px] max-md:h-[calc(100%+40px)]" />
+      <section className="relative isolate flex aspect-[1919/820] max-md:aspect-auto max-md:min-h-[250px] w-full flex-col justify-center overflow-hidden rounded-b-[24px] px-[4%] text-white shadow-[0_6px_10px_rgba(0,0,0,0.25)] md:rounded-b-[2.1vw] md:px-0 md:shadow-none">
+        <img src={heroImage} alt="" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_40%] max-md:-top-[20px] max-md:h-[calc(100%+20px)]" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/60 via-black/10 to-transparent" />
 
         <div className="flex items-center justify-between gap-[clamp(8px,2.5vw,24px)] max-md:pt-[64px] md:grid md:flex-1 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-stretch md:gap-[1.7vw] md:px-[4.3%] md:py-[3%] lg:gap-[2vw]">
           {/* COLUMNA IZQUIERDA: título, subtítulo y pill */}
-          <div className="min-w-0 flex-1 pt-[4%] md:flex-none md:self-start md:pt-[10vw] md:translate-x-[2%] lg:pt-[20%]">
-            <h1 className="text-[clamp(22px,6.2vw,48px)] leading-[0.95] font-semibold drop-shadow-[0_4px_14px_rgba(0,0,0,0.35)] md:text-[4.1vw] lg:text-[6.0vw] md:leading-[0.92]">
+          <div className="min-w-0 flex-1 pt-0 max-md:-mt-[15px] md:flex-none md:self-start md:pt-[10vw] md:translate-x-[2%] lg:pt-[20%]">
+            <h1 className="text-[clamp(28px,6.2vw,48px)] leading-[0.95] font-semibold drop-shadow-[0_4px_14px_rgba(0,0,0,0.35)] md:text-[4.1vw] lg:text-[6.0vw] md:leading-[0.92]">
               {heroData.title.map((line) => (
                 <span key={line} className="block whitespace-nowrap">{line}</span>
               ))}

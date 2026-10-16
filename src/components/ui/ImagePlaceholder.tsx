@@ -1,14 +1,9 @@
 import type { ReactNode } from 'react';
 
-// ESPACIO PARA IMÁGENES Y LOGOS
-// Reemplaza el contenido de este componente por <img> cuando tengas el archivo.
-// Úsalo así:  <ImagePlaceholder name="hero-image" className="h-[400px] w-full" />
-// La lista de imágenes pendientes está en README.md (sección "Imágenes necesarias").
-
 interface ImagePlaceholderProps {
-  name: string;          // nombre del archivo esperado, ej. "hero-image"
-  className?: string;    // tamaño y proporción del diseño Figma
-  children?: ReactNode;  // opcional: contenido que vaya dentro del espacio
+  name: string;          
+  className?: string;    
+  children?: ReactNode;  
 }
 
 function ImagePlaceholder({ name, className = '', children }: ImagePlaceholderProps) {

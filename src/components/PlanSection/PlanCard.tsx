@@ -5,10 +5,10 @@ import Button from '../ui/Button';
 
 // CUADRO de cada canal (en tablet y PC se escala con la pantalla; celular igual).
 const channelSizes: Record<string, string> = {
-  'logo-disney': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
-  'logo-espa': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
-  'logo-sony': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
-  'logo-warner': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
+  'logo-disney': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4vw] lg:w-[4vw]',
+  'logo-espa': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4vw] lg:w-[4vw]',
+  'logo-sony': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4vw] lg:w-[4vw]',
+  'logo-warner': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4vw] lg:w-[4vw]',
 };
 
 // ZOOM de la imagen dentro de su cuadro: scale-90 la aleja, scale-110 la acerca.
@@ -29,10 +29,6 @@ interface PlanCardProps {
   plan: PlanCardData;
 }
 
-// CELULAR: tarjeta más baja, textos y botón chicos (tamaños en px).
-// TABLET Y PC (768 px o más): todo proporcional al ancho de la pantalla, sin tamaños fijos.
-// GB TACHADO: va en la línea del GB; si ninguna línea tiene GB, va en la primera.
-
 function PlanCard({ plan }: PlanCardProps) {
   const { openCallRequest } = useCallRequest();
   const gbLineIndex = plan.description.findIndex((line) => line.includes('GB'));
@@ -45,7 +41,7 @@ function PlanCard({ plan }: PlanCardProps) {
   const small = Boolean(plan.compact);
 
   return (
-    <article className="flex min-h-[260px] w-full flex-col items-center rounded-[16px] bg-dark px-3 pb-4 pt-4 text-center text-white shadow-[0_10px_22px_rgba(0,0,0,0.35)] transition duration-300 hover:shadow-[0_18px_34px_rgba(0,0,0,0.45)] md:min-h-0 lg:min-h-[440px] xl:min-h-[430px] md:rounded-[32px] md:px-[6%] md:py-[4%] md:pb-6">
+    <article className="flex min-h-[260px] w-full flex-col items-center rounded-[16px] bg-dark px-3 pb-4 pt-4 text-center text-white shadow-[0_10px_22px_rgba(0,0,0,0.35)] transition duration-300 hover:shadow-[0_18px_34px_rgba(0,0,0,0.45)] md:min-h-0 lg:min-h-0 xl:min-h-0 md:rounded-[32px] md:px-[6%] md:py-[4%] md:pb-6">
       {/* BADGE: celular text-[10px] · tablet y PC grandes en una línea */}
       <span className="inline-flex w-[90%] items-center justify-center rounded-full bg-purple px-2 py-1 text-center text-[10px] font-bold leading-tight md:w-[94%] md:whitespace-nowrap md:px-[1vw] md:py-[0.5vw] md:text-[max(12px,1.6vw)] lg:w-[94%] lg:px-[1vw] lg:py-[0.6vw] lg:text-[max(14px,1.8vw)]">
         {plan.badge}
@@ -72,14 +68,14 @@ function PlanCard({ plan }: PlanCardProps) {
 
       {/* IMAGEN: logos, canales y router, o ícono del plan */}
       {hasImages ? (
-          <div className={`my-2 flex flex-col items-center md:my-auto md:py-[1.5vw] lg:py-[1.8vw] ${small ? 'gap-1' : 'gap-2'}`}>
+        <div className={`my-2 flex flex-col items-center md:my-auto md:py-[1.5vw] lg:py-[1.2vw] ${small ? 'gap-1' : 'gap-2'}`}>
           {logoSrcs.map((src) => (
             <img
               key={src}
               src={src}
               alt=""
               aria-hidden="true"
-              className={`w-auto object-contain ${small ? 'max-h-[22px] md:max-h-[4.6vw] lg:max-h-[4.2vw]' : 'max-h-[30px] md:max-h-[6.5vw] lg:max-h-[6.5vw]'}`}
+              className={`w-auto object-contain ${small ? 'max-h-[22px] md:max-h-[4.6vw] lg:max-h-[4.2vw]' : 'max-h-[30px] md:max-h-[6.5vw] lg:max-h-[5vw]'}`}
             />
           ))}
           {(channelSrcs.length > 0 || deviceSrcs.length > 0) && (
@@ -91,7 +87,7 @@ function PlanCard({ plan }: PlanCardProps) {
                     return src ? (
                       <div
                         key={name}
-                        className={`overflow-hidden rounded-xl shadow-md ${small ? 'h-7 w-7 md:h-[4vw] md:w-[4vw] lg:h-[4.5vw] lg:w-[4.5vw]' : channelSizes[name] ?? 'h-10 w-10 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]'}`}
+                        className={`overflow-hidden rounded-xl shadow-md ${small ? 'h-7 w-7 md:h-[4vw] md:w-[4vw] lg:h-[4.5vw] lg:w-[4.5vw]' : channelSizes[name] ?? 'h-10 w-10 md:h-[5vw] md:w-[5vw] lg:h-[4vw] lg:w-[4vw]'}`}
                       >
                         <img
                           src={src}
@@ -110,7 +106,7 @@ function PlanCard({ plan }: PlanCardProps) {
                   src={src}
                   alt=""
                   aria-hidden="true"
-                  className={`w-auto object-contain ${small ? 'max-h-[36px] md:max-h-[7vw] lg:max-h-[6.5vw]' : 'max-h-[40px] md:max-h-[8vw] lg:max-h-[8vw]'}`}
+                  className={`w-auto object-contain ${small ? 'max-h-[36px] md:max-h-[7vw] lg:max-h-[6.5vw]' : 'max-h-[40px] md:max-h-[8vw] lg:max-h-[6vw]'}`}
                 />
               ))}
             </div>
@@ -118,12 +114,12 @@ function PlanCard({ plan }: PlanCardProps) {
         </div>
       ) : (
         iconSrc && (
-          <div className="flex w-full justify-center md:flex-1 md:items-center md:py-[2.5vw] lg:py-[3vw]">
+          <div className="flex w-full justify-center md:flex-1 md:items-center md:py-[2.5vw] lg:py-[1.0vw]">
             <img
               src={iconSrc}
               alt=""
               aria-hidden="true"
-              className="mt-4 mb-2 h-[56px] w-auto max-w-full object-contain md:my-0 md:h-[10vw] lg:h-[11vw]"
+              className="mt-4 mb-2 h-[56px] w-auto max-w-full object-contain md:my-0 md:h-[10vw] lg:h-[10vw]"
             />
           </div>
         )

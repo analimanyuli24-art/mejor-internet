@@ -1,10 +1,6 @@
 import type { FAQItem as FAQItemData } from '../../types/content.types';
 import { useCallRequest } from '../CallRequest/CallRequestContext';
 
-// UNA PREGUNTA: al hacer clic se abre/cierra la respuesta.
-// GUÍA: pregunta text-[clamp(12px,1.4vw,20px)] · respuesta text-[clamp(11px,1.3vw,18px)]
-// BOTÓN: más grande = sube el máximo del padding y del texto.
-
 interface FAQItemProps {
   item: FAQItemData;
   isOpen: boolean;

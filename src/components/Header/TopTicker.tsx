@@ -1,11 +1,5 @@
 import { tickerMessages } from '../../data/siteData';
 
-// BARRA MORADA de oferta: mensajes en bucle continuo (3 copias).
-// GUÍA: velocidad 30s (más = más lento).
-// CELULAR: py-1 y text-[11px] (más chico que antes).
-// Letra: tablet/PC md:text-[clamp(12px,1vw,22px)] (más = letra más grande)
-// Espacio entre mensajes en tablet/PC: clamp(32px,3.2vw,64px)
-
 const COPIES = [0, 1, 2];
 
 function TopTicker() {
