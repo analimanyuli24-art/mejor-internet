@@ -21,7 +21,7 @@ export const introData = {
 };
 
 export const footerData = {
-  companyName: 'DACARTELECOM SA.',
+  companyName: 'DACARTELECOM S.A.C',
   legalLinks: [
     { label: 'AVISO LEGAL', href: '#' },      // TODO: AGREGAR ENLACE CUANDO SE DEFINA EL DESTINO
     { label: 'POLÍTICA DE PRIVACIDAD', href: '#' }, // TODO: AGREGAR ENLACE CUANDO SE DEFINA EL DESTINO

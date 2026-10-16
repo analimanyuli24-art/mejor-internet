@@ -52,16 +52,18 @@ function Footer() {
         </div>
       </div>
 
-      <div className="mt-4 border-t border-white/30 pt-3 text-[8px] leading-relaxed md:mt-6 md:pt-4 md:text-[clamp(11px,1vw,14px)]">
-        <p className="inline md:block">{footerData.companyName}</p>{' '}
-        <span className="inline md:hidden">
-          {footerData.legalLinks.map((link, index) => (
-            <span key={link.label}>
-              <a href={link.href} className="hover:underline">{link.label}</a>
-              {index < footerData.legalLinks.length - 1 && ' / '}
-            </span>
-          ))}
-        </span>
+      <div className="mt-4 border-t border-white/30 pt-3 text-[8px] leading-relaxed max-md:text-center md:mt-6 md:pt-4 md:text-[clamp(11px,1vw,14px)]">
+        <div className="max-md:flex max-md:items-center max-md:justify-center max-md:gap-2 max-md:whitespace-nowrap">
+          <p className="inline md:block">{footerData.companyName}</p>
+          <span className="inline md:hidden">
+            {footerData.legalLinks.map((link, index) => (
+              <span key={link.label}>
+                <a href={link.href} className="hover:underline">{link.label}</a>
+                {index < footerData.legalLinks.length - 1 && ' / '}
+              </span>
+            ))}
+          </span>
+        </div>
         <p className="mt-1 hidden flex-wrap gap-x-2 md:flex">
           {footerData.legalLinks.map((link, index) => (
             <span key={link.label}>

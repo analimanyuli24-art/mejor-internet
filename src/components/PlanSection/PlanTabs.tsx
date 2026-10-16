@@ -25,7 +25,7 @@ function PlanTabs({ tabs, activeId, onChange }: PlanTabsProps) {
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
-            className={`rounded-full px-2.5 py-1 text-[8px] font-medium transition-all duration-300 md:px-[1vw] md:py-[0.8vw] md:text-[1.5vw] ${
+           className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-all duration-300 md:px-[1vw] md:py-[0.8vw] md:text-[1.5vw] ${
               isActive ? 'bg-purple text-white' : 'text-dark hover:bg-lavender/60'
             }`}
           >

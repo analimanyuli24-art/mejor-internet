@@ -5,7 +5,7 @@ import PlanTabs from './PlanTabs';
 import PlanCard from './PlanCard';
 
 // SECCIÓN "ELIGE TU PRÓXIMO PLAN.".
-// CELULAR: una tarjeta a la vez, con flecha. Sin cambios.
+// CELULAR: una tarjeta a la vez, con flechas. La flecha de un lado desaparece al llegar al final.
 // TABLET Y PC (md+): 3 tarjetas en fila, todo en vw sin mínimo ni máximo.
 
 function PlanSection() {
@@ -19,11 +19,12 @@ function PlanSection() {
     setCardIndex(0);
   };
 
-  const nextCard = () => setCardIndex((i) => (i + 1) % total);
+  const nextCard = () => setCardIndex((i) => Math.min(i + 1, total - 1));
+  const prevCard = () => setCardIndex((i) => Math.max(i - 1, 0));
 
   return (
-    <section className="mx-[2%] mt-8 rounded-[32px] bg-lavender px-4 py-8 shadow-[0_25px_60px_rgba(29,11,51,0.3)] md:mt-[3.5vw] md:rounded-[3.3vw] md:px-[4%] md:py-[3.5vw]">
-      <h2 className="text-center text-[clamp(12px,3.6vw,15px)] font-semibold leading-tight text-dark md:text-[2.6vw]">
+    <section className="mx-[2%] mt-8 rounded-[32px] bg-lavender px-4 py-8 shadow-[0_25px_60px_rgba(29,11,51,0.3)] md:mt-[3.5vw] md:rounded-[3.3vw] md:px-[4%] md:py-[3.5vw] md:[zoom:0.7]">
+      <h2 className="text-center text-[clamp(14px,4.2vw,18px)] font-semibold leading-tight text-dark md:text-[2.6vw]">
         ELIGE TU PRÓXIMO PLAN.
       </h2>
 
@@ -43,7 +44,18 @@ function PlanSection() {
           ))}
         </div>
 
-        {total > 1 && (
+        {cardIndex > 0 && (
+          <button
+            type="button"
+            onClick={prevCard}
+            aria-label="Plan anterior"
+            className="absolute left-1 top-1/2 -translate-y-1/2 text-3xl leading-none text-white md:hidden"
+          >
+            ‹
+          </button>
+        )}
+
+        {cardIndex < total - 1 && (
           <button
             type="button"
             onClick={nextCard}

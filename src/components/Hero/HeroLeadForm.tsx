@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import { sendLead, isValidPhone } from '../../services/leadService';
-import Button from '../ui/Button';
 import SuccessMessage from '../CallRequest/SuccessMessage';
+import botonSolicitar from '../../assets/images/badge-movil1.png';
 
 // FORMULARIO "No esperes en línea".
 // CELULAR: sin cambios.
 // TABLET Y PC (md+): ancho en md:max-w-[34vw] (sube el número para más ancho)
 // texto del párrafo proporcional a la pantalla (sin tope en px).
 // halo morado de desenfoque medio alrededor del cuadro (cuadro sólido).
+// BOTÓN: es la imagen badge-movil1.png (ajusta el ancho en w-[70%] / md:w-[80%]).
 
 function HeroLeadForm() {
   const [phone, setPhone] = useState('');
   const [accepted, setAccepted] = useState(false);
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);
-
+const formatPhone = (digits: string) =>
+  digits.replace(/\D/g, '').slice(0, 9).replace(/(\d{3})(?=\d)/g, '$1 ');
   const handleSubmit = async () => {
     if (!isValidPhone(phone)) return setError('Ingresa un número de 9 dígitos.');
     if (!accepted) return setError('Debes aceptar la Política de Privacidad.');
@@ -42,24 +44,33 @@ function HeroLeadForm() {
           </p>
 
           <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Ingresa tu número de teléfono"
-            className="mt-3 h-9 w-full rounded-full border border-white/50 bg-transparent px-3 text-[12px] placeholder:text-white/60 md:mt-[0.8vw] md:h-[2.6vw] md:px-[0.8vw] md:text-[0.9vw]"
-          />
+  type="tel"
+  value={formatPhone(phone)}
+  onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 9))}
+  placeholder="Ingresa tu número de teléfono"
+  className="mt-3 h-8 w-[88%] rounded-full border border-white/50 bg-transparent px-3 text-center !text-[15px] placeholder:text-[10px] placeholder:text-white/60 md:mt-[0.8vw] md:h-[3vw] md:w-[80%] md:px-[0.8vw] md:text-center md:!text-[1.1vw] md:placeholder:text-[1.1vw]"
+/>
           <p className="mt-1 text-[9px] md:mt-[0.7vw] md:text-[0.9vw]">*Ingrese su número sin anteponer el (51)</p>
 
-          <label className="mt-1 flex items-start justify-center gap-1 text-left text-[9px] md:mt-[0.4vw] md:gap-[0.4vw] md:text-[0.9vw]">
-            <input type="checkbox" className="mt-0.5 shrink-0" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
+          <label className="mt-1 flex items-center justify-center gap-1.5 text-left text-[9px] md:mt-[0.4vw] md:gap-[0.5vw] md:text-[0.9vw]">
+            <input
+              type="checkbox"
+              className="h-3 w-3 shrink-0 md:h-[1.2vw] md:w-[1.1vw]"
+              checked={accepted}
+              onChange={(e) => setAccepted(e.target.checked)}
+            />
             <span>He leído y acepto la <u>Política de Privacidad</u></span>
           </label>
 
           {error && <p className="mt-1 text-[9px] text-green md:mt-[0.4vw] md:text-[0.8vw]">{error}</p>}
 
-          <div className="mt-3 md:mt-[0.9vw]">
-            <Button size="sm" className="md:px-4 md:py-1 md:text-[11px] xl:px-10 xl:py-3 xl:text-lg" onClick={handleSubmit}>Solicitar llamada</Button>
-          </div>
+          <button
+            type="button"
+            onClick={handleSubmit}
+          className="mx-auto -mt-1 block w-[55%] transition duration-300 ease-out hover:scale-105 md:mt-[0.9vw] md:w-[80%]"
+          >
+            <img src={botonSolicitar} alt="Solicitar llamada" className="block h-auto w-full" />
+          </button>
         </>
       )}
     </aside>

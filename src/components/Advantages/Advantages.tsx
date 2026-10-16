@@ -11,7 +11,7 @@ const mobileOrder: Record<string, string> = {
 function Advantages() {
   return (
     <section className="mx-[2%] px-4 py-10 md:py-20">
-      <h2 className="text-center text-[12px] font-normal text-purple md:text-[clamp(24px,3.4vw,56px)]">
+      <h2 className="text-center text-[12px] font-normal text-purple md:text-[clamp(23px,3.4vw,35px)]">
         NUESTRAS VENTAJAS
       </h2>
       <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:mt-16 md:grid-cols-4 md:gap-x-12 md:gap-y-12">
