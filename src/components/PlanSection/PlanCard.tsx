@@ -3,12 +3,12 @@ import { useCallRequest } from '../CallRequest/CallRequestContext';
 import { getIconSrc, getLogoSrc } from '../../utils/getIconSrc';
 import Button from '../ui/Button';
 
-// CUADRO de cada canal (tamaño fijo).
+// CUADRO de cada canal (en tablet y PC se escala con la pantalla; celular igual).
 const channelSizes: Record<string, string> = {
-  'logo-disney': 'h-14 w-14 md:h-16 md:w-16',
-  'logo-espa': 'h-14 w-14 md:h-16 md:w-16',
-  'logo-sony': 'h-14 w-14 md:h-16 md:w-16',
-  'logo-warner': 'h-14 w-14 md:h-16 md:w-16',
+  'logo-disney': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
+  'logo-espa': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
+  'logo-sony': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
+  'logo-warner': 'h-14 w-14 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]',
 };
 
 // ZOOM de la imagen dentro de su cuadro: scale-90 la aleja, scale-110 la acerca.
@@ -30,7 +30,7 @@ interface PlanCardProps {
 }
 
 // CELULAR: tarjeta más baja, textos y botón chicos (tamaños en px).
-// PC (md+): mismos valores de siempre, con el botón grande (Button).
+// TABLET Y PC (768 px o más): todo proporcional al ancho de la pantalla, sin tamaños fijos.
 // GB TACHADO: va en la línea del GB; si ninguna línea tiene GB, va en la primera.
 
 function PlanCard({ plan }: PlanCardProps) {
@@ -45,14 +45,14 @@ function PlanCard({ plan }: PlanCardProps) {
   const small = Boolean(plan.compact);
 
   return (
-    <article className="flex min-h-[260px] w-full flex-col items-center rounded-[16px] bg-dark px-3 pb-4 pt-4 text-center text-white shadow-[0_10px_22px_rgba(0,0,0,0.35)] transition duration-300 hover:shadow-[0_18px_34px_rgba(0,0,0,0.45)] md:min-h-[440px] xl:min-h-[430px] md:rounded-[32px] md:px-[6%] md:py-[4%] md:pb-6">
-      {/* BADGE: celular text-[10px] · PC text-lg */}
-      <span className="inline-flex w-[90%] items-center justify-center rounded-full bg-purple px-2 py-1 text-center text-[10px] font-bold leading-tight md:w-[85%] md:px-3 md:text-lg 2xl:text-xl">
+    <article className="flex min-h-[260px] w-full flex-col items-center rounded-[16px] bg-dark px-3 pb-4 pt-4 text-center text-white shadow-[0_10px_22px_rgba(0,0,0,0.35)] transition duration-300 hover:shadow-[0_18px_34px_rgba(0,0,0,0.45)] md:min-h-0 lg:min-h-[440px] xl:min-h-[430px] md:rounded-[32px] md:px-[6%] md:py-[4%] md:pb-6">
+      {/* BADGE: celular text-[10px] · tablet y PC grandes en una línea */}
+      <span className="inline-flex w-[90%] items-center justify-center rounded-full bg-purple px-2 py-1 text-center text-[10px] font-bold leading-tight md:w-[94%] md:whitespace-nowrap md:px-[1vw] md:py-[0.5vw] md:text-[max(12px,1.6vw)] lg:w-[94%] lg:px-[1vw] lg:py-[0.6vw] lg:text-[max(14px,1.8vw)]">
         {plan.badge}
       </span>
 
-      {/* DESCRIPCIÓN: celular text-[10px] · PC text-base */}
-      <div className="mt-2 space-y-0.5 text-[10px] leading-snug md:mt-[6%] md:text-base 2xl:text-lg">
+      {/* DESCRIPCIÓN: celular text-[10px] · tablet y PC proporcionales */}
+      <div className="mt-2 space-y-0.5 text-[10px] leading-snug md:mt-[6%] md:text-[max(10px,1vw)] lg:text-[max(12px,1.3vw)]">
         {plan.description.map((line, index) => (
           <p key={line}>
             {index === strikeIndex && plan.oldGb && (
@@ -63,8 +63,8 @@ function PlanCard({ plan }: PlanCardProps) {
         ))}
       </div>
 
-      {/* BULLETS: celular text-[10px] · PC text-base */}
-      <div className="mt-1 space-y-0.5 text-[10px] md:mt-2 md:text-base">
+      {/* BULLETS: celular text-[10px] · tablet y PC proporcionales */}
+      <div className="mt-1 space-y-0.5 text-[10px] md:mt-2 md:text-[max(10px,1vw)] lg:text-[max(12px,1.3vw)]">
         {plan.bullets?.map((bullet) => (
           <p key={bullet}>• {bullet}</p>
         ))}
@@ -72,26 +72,26 @@ function PlanCard({ plan }: PlanCardProps) {
 
       {/* IMAGEN: logos, canales y router, o ícono del plan */}
       {hasImages ? (
-        <div className={`my-2 flex flex-col items-center md:my-auto ${small ? 'gap-1' : 'gap-2'}`}>
+          <div className={`my-2 flex flex-col items-center md:my-auto md:py-[1.5vw] lg:py-[1.8vw] ${small ? 'gap-1' : 'gap-2'}`}>
           {logoSrcs.map((src) => (
             <img
               key={src}
               src={src}
               alt=""
               aria-hidden="true"
-              className={`w-auto object-contain ${small ? 'max-h-[22px] md:max-h-[40px]' : 'max-h-[30px] md:max-h-[60px]'}`}
+              className={`w-auto object-contain ${small ? 'max-h-[22px] md:max-h-[4.6vw] lg:max-h-[4.2vw]' : 'max-h-[30px] md:max-h-[6.5vw] lg:max-h-[6.5vw]'}`}
             />
           ))}
           {(channelSrcs.length > 0 || deviceSrcs.length > 0) && (
-            <div className="flex items-center justify-center gap-2 md:gap-3">
+            <div className="flex items-center justify-center gap-2 md:gap-[1.2vw]">
               {channelSrcs.length > 0 && (
-                <div className="grid grid-cols-2 gap-1.5 md:gap-2">
+                <div className="grid grid-cols-2 gap-1.5 md:gap-[0.6vw]">
                   {(plan.channels ?? []).map((name) => {
                     const src = getLogoSrc(name);
                     return src ? (
                       <div
                         key={name}
-                        className={`overflow-hidden rounded-xl shadow-md ${small ? 'h-7 w-7 md:h-10 md:w-10' : channelSizes[name] ?? 'h-10 w-10 md:h-16 md:w-16'}`}
+                        className={`overflow-hidden rounded-xl shadow-md ${small ? 'h-7 w-7 md:h-[4vw] md:w-[4vw] lg:h-[4.5vw] lg:w-[4.5vw]' : channelSizes[name] ?? 'h-10 w-10 md:h-[5vw] md:w-[5vw] lg:h-[4.8vw] lg:w-[4.8vw]'}`}
                       >
                         <img
                           src={src}
@@ -110,7 +110,7 @@ function PlanCard({ plan }: PlanCardProps) {
                   src={src}
                   alt=""
                   aria-hidden="true"
-                  className={`w-auto object-contain ${small ? 'max-h-[36px] md:max-h-[60px]' : 'max-h-[40px] md:max-h-[80px]'}`}
+                  className={`w-auto object-contain ${small ? 'max-h-[36px] md:max-h-[7vw] lg:max-h-[6.5vw]' : 'max-h-[40px] md:max-h-[8vw] lg:max-h-[8vw]'}`}
                 />
               ))}
             </div>
@@ -118,20 +118,22 @@ function PlanCard({ plan }: PlanCardProps) {
         </div>
       ) : (
         iconSrc && (
-          <img
-            src={iconSrc}
-            alt=""
-            aria-hidden="true"
-            className="mx-auto mt-4 mb-2 h-[56px] w-auto max-w-full object-contain md:my-auto md:h-[96px]"
-          />
+          <div className="flex w-full justify-center md:flex-1 md:items-center md:py-[2.5vw] lg:py-[3vw]">
+            <img
+              src={iconSrc}
+              alt=""
+              aria-hidden="true"
+              className="mt-4 mb-2 h-[56px] w-auto max-w-full object-contain md:my-0 md:h-[10vw] lg:h-[11vw]"
+            />
+          </div>
         )
       )}
 
       {/* PRECIO + BOTÓN: van juntos al fondo, así quedan alineados en todas las tarjetas */}
       <div className="mt-auto flex w-full flex-col items-center">
-        <p className="pt-2 text-xl font-bold md:text-4xl">
+        <p className="pt-2 text-xl font-bold md:text-[max(20px,2.6vw)] lg:text-[max(24px,3vw)]">
           {plan.price}
-          <span className="text-[9px] font-normal md:text-sm">/mes</span>
+          <span className="text-[9px] font-normal md:text-[max(9px,0.8vw)] lg:text-[max(11px,1vw)]">/mes</span>
         </p>
 
         {/* BOTÓN CELULAR: chico */}
@@ -143,9 +145,15 @@ function PlanCard({ plan }: PlanCardProps) {
           Saber más
         </button>
 
-        {/* BOTÓN PC: grande (Button) */}
+        {/* BOTÓN TABLET Y PC: grande (Button), proporcional al ancho */}
         <div className="mt-3 mb-4 hidden md:mt-[4%] md:block">
-          <Button size="xl" onClick={() => openCallRequest(plan.id)}>Saber más</Button>
+          <Button
+            size="xl"
+            className="md:px-[max(16px,2.4vw)] md:py-[max(5px,0.6vw)] md:text-[max(13px,1.5vw)] lg:px-[max(16px,2.4vw)] lg:py-[max(5px,0.6vw)] lg:text-[max(13px,1.5vw)]"
+            onClick={() => openCallRequest(plan.id)}
+          >
+            Saber más
+          </Button>
         </div>
       </div>
     </article>
