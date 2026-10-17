@@ -9,6 +9,8 @@ interface CallRequestModalProps {
   onClose: () => void;
 }
 
+const formatPhoneInput = (digits: string) => digits.replace(/(\d{3})(?=\d)/g, '$1 ');
+
 function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
   const [phone, setPhone] = useState('');
   const [accepted, setAccepted] = useState(false);
@@ -16,6 +18,10 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
   const [sent, setSent] = useState(false);
 
   if (!isOpen) return null;
+
+  const handlePhoneChange = (value: string) => {
+    setPhone(value.replace(/\D/g, '').slice(0, 9));
+  };
 
   const handleSubmit = async () => {
     if (!isValidPhone(phone)) return setError('Ingresa un número de 9 dígitos.');
@@ -63,16 +69,27 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
 
             <input
               type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              inputMode="numeric"
+              value={formatPhoneInput(phone)}
+              onChange={(e) => handlePhoneChange(e.target.value)}
               placeholder="Ingresa tu número de teléfono"
-              className="mt-4 h-10 w-[90%] rounded-full border border-white/60 bg-transparent px-4 text-center text-sm placeholder:text-white/60 md:mt-6 md:h-12 md:w-[80%] md:px-5 md:text-base"
+              className="mt-4 h-10 w-[90%] rounded-full border border-white/60 bg-transparent px-4 text-center text-base tracking-wide placeholder:text-sm placeholder:tracking-normal placeholder:text-white/60 md:mt-6 md:h-12 md:w-[80%] md:px-5 md:text-lg md:placeholder:text-base"
             />
             <p className="mt-3 text-xs md:text-[17px]">*Ingrese su número sin anteponer el (51)</p>
 
             <label className="mt-3 flex items-center justify-center gap-1.5 text-[11px] md:mt-3 md:gap-2 md:text-[17px]">
               <input type="checkbox" className="h-4 w-4 md:h-5 md:w-5" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
-              He leído y acepto la <u>Política de Privacidad</u>
+              <span>
+                He leído y acepto la{' '}
+                <a
+                  href="https://docs.google.com/document/u/0/d/1eBWDwnz2D6JZm7GIamQ54Oq_Uz41ZAQlVXmS6OHddBw/mobilebasic"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer underline transition hover:text-purple"
+                >
+                  Política de Privacidad
+                </a>
+              </span>
             </label>
 
             {error && <p className="mt-2 text-xs text-green md:mt-3 md:text-base">{error}</p>}
@@ -82,14 +99,6 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
                 Solicitar llamada
               </Button>
             </div>
-
-            <div className="-mx-4 mt-5 bg-lavender px-4 py-2 text-xs font-semibold text-dark md:-mx-8 md:mt-7 md:px-8 md:py-3 md:text-base">
-              ¿Te gustaría conversar ahora mismo?
-            </div>
-            <p className="mx-auto mt-3 text-center text-xs leading-snug md:mt-3 md:text-[18px]">
-              Llámanos al <b>01 7012004</b> y uno de<br />
-              nuestros asesores te atenderá con gusto.
-            </p>
           </>
         )}
       </div>

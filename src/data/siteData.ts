@@ -23,8 +23,13 @@ export const introData = {
 export const footerData = {
   companyName: 'DACARTELECOM S.A.C',
   legalLinks: [
-    { label: 'AVISO LEGAL', href: '#' },      // TODO: AGREGAR ENLACE CUANDO SE DEFINA EL DESTINO
-    { label: 'POLÍTICA DE PRIVACIDAD', href: '#' }, // TODO: AGREGAR ENLACE CUANDO SE DEFINA EL DESTINO
-    { label: 'COOKIES', href: '#' },          // TODO: AGREGAR ENLACE CUANDO SE DEFINA EL DESTINO
+    {
+      label: 'TÉRMINOS Y CONDICIONES',
+      href: 'https://docs.google.com/document/u/0/d/18ZiUKyA6X-ZU9i8kf1NV5f6Z9efQSfsAhJ1LVncJkiU/mobilebasic',
+    },
+    {
+      label: 'POLÍTICA DE PRIVACIDAD',
+      href: 'https://docs.google.com/document/u/0/d/1eBWDwnz2D6JZm7GIamQ54Oq_Uz41ZAQlVXmS6OHddBw/mobilebasic',
+    },
   ],
 };

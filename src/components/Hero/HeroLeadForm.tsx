@@ -3,13 +3,6 @@ import { sendLead, isValidPhone } from '../../services/leadService';
 import SuccessMessage from '../CallRequest/SuccessMessage';
 import botonSolicitar from '../../assets/images/badge-movil1.png';
 
-// FORMULARIO "No esperes en línea".
-// CELULAR: sin cambios.
-// TABLET Y PC (md+): ancho en md:max-w-[34vw] (sube el número para más ancho)
-// texto del párrafo proporcional a la pantalla (sin tope en px).
-// halo morado de desenfoque medio alrededor del cuadro (cuadro sólido).
-// BOTÓN: es la imagen badge-movil1.png (ajusta el ancho en w-[70%] / md:w-[80%]).
-
 function HeroLeadForm() {
   const [phone, setPhone] = useState('');
   const [accepted, setAccepted] = useState(false);
@@ -44,12 +37,12 @@ const formatPhone = (digits: string) =>
           </p>
 
           <input
-  type="tel"
-  value={formatPhone(phone)}
-  onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 9))}
-  placeholder="Ingresa tu número de teléfono"
-  className="mt-3 h-8 w-[88%] rounded-full border border-white/50 bg-transparent px-3 text-center !text-[15px] placeholder:text-[10px] placeholder:text-white/60 md:mt-[0.8vw] md:h-[3vw] md:w-[80%] md:px-[0.8vw] md:text-center md:!text-[1.1vw] md:placeholder:text-[1.1vw]"
-/>
+           type="tel"
+           value={formatPhone(phone)}
+           onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 9))}
+           placeholder="Ingresa tu número de teléfono"
+                      className="mt-3 h-8 w-[88%] rounded-full border border-white/50 bg-transparent px-3 text-center !text-[15px] placeholder:text-[10px] placeholder:text-white/60 md:mt-[0.8vw] md:h-[3vw] md:w-[92%] md:px-[0.5vw] md:text-center md:!text-[1.1vw] md:placeholder:text-[0.9vw]"
+          />
           <p className="mt-1 text-[9px] md:mt-[0.7vw] md:text-[0.9vw]">*Ingrese su número sin anteponer el (51)</p>
 
           <label className="mt-1 flex items-center justify-center gap-1.5 text-left text-[9px] md:mt-[0.4vw] md:gap-[0.5vw] md:text-[0.9vw]">
@@ -59,9 +52,8 @@ const formatPhone = (digits: string) =>
               checked={accepted}
               onChange={(e) => setAccepted(e.target.checked)}
             />
-            <span>He leído y acepto la <u>Política de Privacidad</u></span>
+            <span>He leído y acepto la <a href="https://docs.google.com/document/u/0/d/1eBWDwnz2D6JZm7GIamQ54Oq_Uz41ZAQlVXmS6OHddBw/mobilebasic" target="_blank" rel="noopener noreferrer" className="cursor-pointer underline transition hover:text-purple">Política de Privacidad</a></span>
           </label>
-
           {error && <p className="mt-1 text-[9px] text-green md:mt-[0.4vw] md:text-[0.8vw]">{error}</p>}
 
           <button
