@@ -47,9 +47,6 @@ interface PlanCardProps {
   plan: PlanCardData;
 }
 
-// TABLET Y PC: cada medida es vw con un tope en px (min). Cambia por rango de pantalla.
-// Al hacer zoom out, el tope hace que todo se achique junto y la tarjeta se mantenga cuadrada.
-
 function PlanCard({ plan }: PlanCardProps) {
   const { openCallRequest } = useCallRequest();
   if (!plan) return null;
@@ -81,7 +78,7 @@ function PlanCard({ plan }: PlanCardProps) {
         {plan.description.map((line, index) => (
           <p key={line}>
             {index === strikeIndex && plan.oldGb && (
-              <s className="mr-1 decoration-2">{plan.oldGb}</s>
+             <s className="mr-1 decoration-1 md:decoration-2">{plan.oldGb}</s>
             )}
             {line}
           </p>

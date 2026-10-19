@@ -24,7 +24,7 @@ export const plansTabs: PlanTab[] = [
             {
         id: 'internet-mas-velocidad',
         badge: '¡MÁS VELOCIDAD!',
-        oldGb: '200 GB',
+        oldGb: '200 MBPS  ',
         description: ['400 MBPS A ALTA VELOCIDAD', '(BONO PROMOCIONAL)'],
         bullets: ['MESH - WIFI 360°'],
         price: 'S/69.00',
@@ -33,7 +33,7 @@ export const plansTabs: PlanTab[] = [
                   {
         id: 'internet-maxima-velocidad',
         badge: '¡MÁXIMA VELOCIDAD!',
-        oldGb: '500 GB   ',
+        oldGb: '500 MBPS   ',
         description: ['1000 MBPS A ALTA VELOCIDAD', '(BONO PROMOCIONAL)'],
         bullets: ['MESH - WIFI 360°'],
         price: 'S/79.00',
@@ -57,7 +57,7 @@ export const plansTabs: PlanTab[] = [
             {
         id: 'tv-todo-en-uno',
         badge: '¡TODO EN UNO!',
-        oldGb: '200 GB  ',
+        oldGb: '200 MBPS  ',
         description: ['400 MBPS A ALTA VELOCIDAD', '(BONO PROMOCIONAL)'],
         bullets: ['105 canales HD', '2 decos incluidos'],
         price: 'S/94.00',
@@ -69,7 +69,7 @@ export const plansTabs: PlanTab[] = [
       {
         id: 'tv-mas-potencia',
         badge: '¡MÁS POTENCIA!',
-        oldGb: '400 GB   ',
+        oldGb: '400 MBPS   ',
         description: ['1000 MBPS A ALTA VELOCIDAD', '(BONO PROMOCIONAL)'],
         bullets: ['105 canales HD', '2 decos incluidos', 'MESH- WIFI 360°'],
         price: 'S/114.00',

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { footerData } from '../../data/siteData';
+import { legalDocs, type LegalKey } from '../../data/legalData';
 import footerLogo from '../../assets/logos/logo-mejor-internet-white.png';
 import { sendLead, isValidPhone } from '../../services/leadService';
+import LegalModal from './LegalModal';
 
 function Footer() {
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [legal, setLegal] = useState<LegalKey | null>(null);
 
   const handleCall = async () => {
     if (!isValidPhone(phone)) {
@@ -17,6 +20,11 @@ function Footer() {
     if (result.ok) setPhone('');
   };
 
+  const openLegal = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
+    e.preventDefault();
+    setLegal(index === 0 ? 'terms' : 'privacy');
+  };
+
   return (
     <footer className="relative z-10 -mt-12 rounded-t-[32px] bg-dark px-5 pb-4 pt-6 text-white md:-mt-24 md:px-[4.3%] md:pb-6 md:pt-12">
       <div className="flex flex-row items-start justify-between gap-3 md:items-stretch md:gap-6">
@@ -26,7 +34,7 @@ function Footer() {
           className="relative -left-2 -top-2 h-[40px] w-[100px] shrink-0 object-contain md:-left-8 md:-top-6 md:h-[clamp(72px,7.2vw,120px)] md:w-[clamp(190px,18vw,270px)]"
         />
 
-        <div className="-mr-7 ml-auto w-[62%] text-center md:ml-auto md:-mr-[min(6vw,100px)] md:w-[clamp(300px,36vw,480px)] md:text-center">
+        <div className="-mr-7 ml-auto w-[62%] text-center md:ml-auto md:-mr-[min(6vw,96px)] md:w-[clamp(300px,36vw,480px)] md:text-center">
           <p className="text-[13px] font-bold md:text-[clamp(14px,1.4vw,20px)]">Te informamos</p>
           <p className="text-[10px] leading-snug md:text-[clamp(12px,1.1vw,16px)]">
             Deja tu teléfono y<br />te llamamos sin compromiso
@@ -58,7 +66,7 @@ function Footer() {
           <span className="inline md:hidden">
             {footerData.legalLinks.map((link, index) => (
               <span key={link.label}>
-                <a href={link.href} className="hover:underline">{link.label}</a>
+                <a href={link.href} onClick={(e) => openLegal(e, index)} className="transition-colors active:text-purple active:underline">{link.label}</a>
                 {index < footerData.legalLinks.length - 1 && ' / '}
               </span>
             ))}
@@ -67,12 +75,20 @@ function Footer() {
         <p className="mt-1 hidden flex-wrap gap-x-2 md:flex">
           {footerData.legalLinks.map((link, index) => (
             <span key={link.label}>
-              <a href={link.href} className="hover:underline">{link.label}</a>
+              <a href={link.href} onClick={(e) => openLegal(e, index)} className="hover:underline">{link.label}</a>
               {index < footerData.legalLinks.length - 1 && ' /'}
             </span>
           ))}
         </p>
       </div>
+
+      {legal && (
+        <LegalModal
+          title={legalDocs[legal].title}
+          blocks={legalDocs[legal].blocks}
+          onClose={() => setLegal(null)}
+        />
+      )}
     </footer>
   );
 }

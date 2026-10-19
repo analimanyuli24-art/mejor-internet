@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { sendLead, isValidPhone } from '../../services/leadService';
 import Button from '../ui/Button';
 import SuccessMessage from './SuccessMessage';
+import LegalLinks from '../legal/LegalLinks';
 
 interface CallRequestModalProps {
   isOpen: boolean;
@@ -25,7 +26,7 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
 
   const handleSubmit = async () => {
     if (!isValidPhone(phone)) return setError('Ingresa un número de 9 dígitos.');
-    if (!accepted) return setError('Debes aceptar la Política de Privacidad.');
+    if (!accepted) return setError('Debes aceptar los Términos y Condiciones y la Política de Privacidad.');
 
     const result = await sendLead({ phone, acceptedPrivacy: accepted, source: 'plan-modal', planId });
     if (result.ok) setSent(true);
@@ -77,18 +78,24 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
             />
             <p className="mt-3 text-xs md:text-[17px]">*Ingrese su número sin anteponer el (51)</p>
 
-            <label className="mt-3 flex items-center justify-center gap-1.5 text-[11px] md:mt-3 md:gap-2 md:text-[17px]">
-              <input type="checkbox" className="h-4 w-4 md:h-5 md:w-5" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
-              <span>
-                He leído y acepto la{' '}
-                <a
-                  href="https://docs.google.com/document/u/0/d/1eBWDwnz2D6JZm7GIamQ54Oq_Uz41ZAQlVXmS6OHddBw/mobilebasic"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer underline transition hover:text-purple"
-                >
-                  Política de Privacidad
-                </a>
+            <label className="mt-3 flex items-start justify-center gap-1.5 text-[11px] md:mt-3 md:gap-2 md:text-[17px]">
+              <input
+                type="checkbox"
+                className="mt-[0.35em] h-4 w-4 shrink-0 md:mt-[0.1em] md:h-5 md:w-5"
+                checked={accepted}
+                onChange={(e) => setAccepted(e.target.checked)}
+              />
+              <span className="text-left md:text-center md:whitespace-nowrap">
+                He leído y acepto los{' '}
+                <LegalLinks
+                  linkClassName="cursor-pointer underline transition hover:text-purple active:text-purple active:opacity-70"
+                  separator={
+                    <>
+                      {' / '}
+                      <br className="hidden md:block" />
+                    </>
+                  }
+                />
               </span>
             </label>
 

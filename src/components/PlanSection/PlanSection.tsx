@@ -45,7 +45,7 @@ function PlanSection() {
             type="button"
             onClick={prevCard}
             aria-label="Plan anterior"
-            className="absolute left-1 top-1/2 -translate-y-1/2 text-3xl leading-none text-white md:hidden"
+            className="absolute left-1 top-1/2 -translate-y-1/2 px-2 text-5xl leading-none text-white md:hidden"
           >
             ‹
           </button>
@@ -56,7 +56,7 @@ function PlanSection() {
             type="button"
             onClick={nextCard}
             aria-label="Siguiente plan"
-            className="absolute right-1 top-1/2 -translate-y-1/2 text-3xl leading-none text-white md:hidden"
+            className="absolute right-1 top-1/2 -translate-y-1/2 px-2 text-5xl leading-none text-white md:hidden"
           >
             ›
           </button>

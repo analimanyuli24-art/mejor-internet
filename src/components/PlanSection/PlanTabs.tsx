@@ -1,10 +1,6 @@
 import type { PlanTab } from '../../data/plansData';
 import type { PlanCategory } from '../../types/content.types';
 
-// TABS INTERNET / INTERNET+TV / MÓVIL.
-// CELULAR: sin cambios.
-// TABLET Y PC (md+): todo en vw, sin mínimo ni máximo.
-
 interface PlanTabsProps {
   tabs: PlanTab[];
   activeId: PlanCategory;
