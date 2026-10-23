@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { footerData } from '../../data/siteData';
 import { legalDocs, type LegalKey } from '../../data/legalData';
 import footerLogo from '../../assets/logos/logo-mejor-internet-white.png';
@@ -20,7 +21,7 @@ function Footer() {
     if (result.ok) setPhone('');
   };
 
-  const openLegal = (e: React.MouseEvent<HTMLAnchorElement>, index: number) => {
+  const openLegal = (e: MouseEvent<HTMLAnchorElement>, index: number) => {
     e.preventDefault();
     setLegal(index === 0 ? 'terms' : 'privacy');
   };
@@ -82,13 +83,15 @@ function Footer() {
         </p>
       </div>
 
-      {legal && (
-        <LegalModal
-          title={legalDocs[legal].title}
-          blocks={legalDocs[legal].blocks}
-          onClose={() => setLegal(null)}
-        />
-      )}
+      {legal &&
+        createPortal(
+          <LegalModal
+            title={legalDocs[legal].title}
+            blocks={legalDocs[legal].blocks}
+            onClose={() => setLegal(null)}
+          />,
+          document.body,
+        )}
     </footer>
   );
 }

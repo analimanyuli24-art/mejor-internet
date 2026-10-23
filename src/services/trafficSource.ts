@@ -20,7 +20,6 @@ export const captureTrafficSource = (): void => {
   }
 };
 
-// Devuelve el origen de la campaña, o null si el visitante llegó de forma orgánica.
 export const getTrafficSource = (): string | null => {
   const fromUrl = readFromUrl();
   if (fromUrl) return fromUrl;

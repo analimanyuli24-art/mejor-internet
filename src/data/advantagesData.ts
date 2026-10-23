@@ -17,7 +17,7 @@ export const advantagesData: AdvantageData[] = [
   {
     id: 'fibra-mas-rapida',
     title: 'La fibra más rápida',
-    description: 'Tenemos la fibra más rápida según el barómetro de nPerf.',
+    description: 'Fibra óptica de alta velocidad para todo tu hogar.',
     iconKey: 'icono-2.3',
   },
   {

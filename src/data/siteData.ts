@@ -1,5 +1,3 @@
-// TEXTOS GENERALES DEL SITIO: barra superior, hero, intro, footer y legales.
-
 export const tickerMessages: string[] = [
   'Incrementa tu velocidad hasta 1000 Mbps + Canales Premium de REGALO. Llama Ahora Gratis',
   '⚡ Oferta Flash: Incrementa tu velocidad hasta 1000 Mbps',
@@ -25,11 +23,11 @@ export const footerData = {
   legalLinks: [
     {
       label: 'TÉRMINOS Y CONDICIONES',
-      href: 'https://docs.google.com/document/u/0/d/18ZiUKyA6X-ZU9i8kf1NV5f6Z9efQSfsAhJ1LVncJkiU/mobilebasic',
+      href: '#',
     },
     {
       label: 'POLÍTICA DE PRIVACIDAD',
-      href: 'https://docs.google.com/document/u/0/d/1eBWDwnz2D6JZm7GIamQ54Oq_Uz41ZAQlVXmS6OHddBw/mobilebasic',
+      href: '#',
     },
   ],
 };

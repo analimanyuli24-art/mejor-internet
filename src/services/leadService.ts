@@ -4,13 +4,14 @@ import { getTrafficSource } from './trafficSource';
 
 const IP_ENDPOINT = 'https://api.ipify.org?format=json';
 
-// Cola 1: contactos orgánicos (Mejor-Internet(Callme))
-const QUEUE_ORGANICA = '1';
-// Cola 2: campaña Hogar N1 (Mejor-Internet-N1(Callme))
-// Reemplaza este valor por el ID que te dé Callme.
-const QUEUE_N1 = 'REEMPLAZAR_CON_ID_CALLME';
+// Cola de contactos entrantes normales
+const QUEUE_ORGANICA = '263';
 
-const CAMPANA_N1 = 'camp_n1';
+// Cola de la campaña Hogar N1
+const QUEUE_N1 = '264';
+
+// Valor exacto del parámetro de campaña
+const CAMPANA_N1 = 'campN1';
 
 async function getClientIp(): Promise<string> {
     try {
@@ -24,7 +25,12 @@ async function getClientIp(): Promise<string> {
 export async function sendLead(data: LeadData): Promise<LeadResult> {
     try {
         const ip = await getClientIp();
-        const queueId = getTrafficSource() === CAMPANA_N1 ? QUEUE_N1 : QUEUE_ORGANICA;
+
+        // Seleccionar la cola según el origen del contacto
+        const queueId =
+            getTrafficSource() === CAMPANA_N1
+                ? QUEUE_N1
+                : QUEUE_ORGANICA;
 
         await axios.post(
             'https://crm.develz.com:4004/call-me',
@@ -42,7 +48,10 @@ export async function sendLead(data: LeadData): Promise<LeadResult> {
 
         return { ok: true };
     } catch (error) {
-        const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+        const status = axios.isAxiosError(error)
+            ? error.response?.status
+            : undefined;
+
         return {
             ok: false,
             message: status
