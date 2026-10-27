@@ -26,5 +26,5 @@ export function getIconSrc(name: string) {
 }
 
 export function getLogoSrc(name: string) {
-  return findSrc(icons, name);
+  return findSrc(logos, name);
 }

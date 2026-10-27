@@ -1,66 +1,50 @@
 import axios from 'axios';
 import type { LeadData, LeadResult } from '../types/lead.types';
-import { getTrafficSource } from './trafficSource';
+import { isCampaignN1, CAMPAIGN_N1 } from './trafficSource';
 
 const IP_ENDPOINT = 'https://api.ipify.org?format=json';
 
-// Cola de contactos entrantes normales
-const QUEUE_ORGANICA = '263';
-
-// Cola de la campaña Hogar N1
-const QUEUE_N1 = '264';
-
-// Valor exacto del parámetro de campaña
-const CAMPANA_N1 = 'campN1';
+const QUEUE_PRINCIPAL = '263'; // mejor-internet(callme)
+const QUEUE_N1 = '264';        // mejor-internetN1(callme)
 
 async function getClientIp(): Promise<string> {
-    try {
-        const { data } = await axios.get<{ ip: string }>(IP_ENDPOINT);
-        return data.ip ?? '';
-    } catch {
-        return '';
-    }
+  try {
+    const { data } = await axios.get<{ ip: string }>(IP_ENDPOINT);
+    return data.ip ?? '';
+  } catch {
+    return '';
+  }
+}
+
+// URL canónica de cada landing, sin utm/gclid ni rutas internas
+function getCompleteUrl(): string {
+  const base = `${window.location.origin}/`;
+  return isCampaignN1() ? `${base}?T-source=${CAMPAIGN_N1}` : base;
 }
 
 export async function sendLead(data: LeadData): Promise<LeadResult> {
-    try {
-        const ip = await getClientIp();
+  try {
+    const ip = await getClientIp();
+    const queueId = isCampaignN1() ? QUEUE_N1 : QUEUE_PRINCIPAL;
 
-        // Seleccionar la cola según el origen del contacto
-        const queueId =
-            getTrafficSource() === CAMPANA_N1
-                ? QUEUE_N1
-                : QUEUE_ORGANICA;
+    await axios.post(
+      'https://crm.develz.com:4004/call-me',
+      { queueId, number: data.phone, ip },
+      { headers: { 'X-URL-Complete': getCompleteUrl() } },
+    );
 
-        await axios.post(
-            'https://crm.develz.com:4004/call-me',
-            {
-                queueId,
-                number: data.phone,
-                ip,
-            },
-            {
-                headers: {
-                    'X-URL-Complete': window.location.href,
-                },
-            },
-        );
-
-        return { ok: true };
-    } catch (error) {
-        const status = axios.isAxiosError(error)
-            ? error.response?.status
-            : undefined;
-
-        return {
-            ok: false,
-            message: status
-                ? `Error del servidor (${status})`
-                : 'No se pudo conectar. Intenta de nuevo.',
-        };
-    }
+    return { ok: true };
+  } catch (error) {
+    const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+    return {
+      ok: false,
+      message: status
+        ? `Error del servidor (${status})`
+        : 'No se pudo conectar. Intenta de nuevo.',
+    };
+  }
 }
 
 export function isValidPhone(phone: string): boolean {
-    return /^\d{9}$/.test(phone);
+  return /^\d{9}$/.test(phone);
 }

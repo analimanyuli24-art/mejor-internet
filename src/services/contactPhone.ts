@@ -1,15 +1,14 @@
-import { getTrafficSource } from './trafficSource';
+import { isCampaignN1 } from './trafficSource';
+
+const PHONE_PRINCIPAL = '017012045';
+const PHONE_N1 = '017012060';
 
 export function getContactPhone(): string {
-  return getTrafficSource() === 'campN1'
-    ? '017012060'
-    : '017012045';
+  return isCampaignN1() ? PHONE_N1 : PHONE_PRINCIPAL;
 }
 
 export function getDisplayPhone(): string {
-  return getTrafficSource() === 'campN1'
-    ? '01 7012060'
-    : '01 7012045';
+  return isCampaignN1() ? '01 7012060' : '01 7012045';
 }
 
 export function getPhoneLink(): string {
