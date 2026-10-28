@@ -1,16 +1,11 @@
-import { isCampaignN1 } from './trafficSource';
+import { isCampaignN1 } from "./trafficSource";
 
-const PHONE_PRINCIPAL = '017012045';
-const PHONE_N1 = '017012060';
+const PHONES = {
+  principal: { display: "01 7012045", tel: "+5117012045" },
+  n1: { display: "01 7012060", tel: "+5117012060" }, // CONFIRMAR
+};
 
-export function getContactPhone(): string {
-  return isCampaignN1() ? PHONE_N1 : PHONE_PRINCIPAL;
-}
+const current = () => (isCampaignN1() ? PHONES.n1 : PHONES.principal);
 
-export function getDisplayPhone(): string {
-  return isCampaignN1() ? '01 7012060' : '01 7012045';
-}
-
-export function getPhoneLink(): string {
-  return `tel:+51${getContactPhone()}`;
-}
+export const getDisplayPhone = () => current().display;
+export const getPhoneLink = () => `tel:${current().tel}`;

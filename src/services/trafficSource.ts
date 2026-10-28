@@ -1,8 +1,8 @@
-const PARAM = 'T-source';
-const STORAGE_KEY = 'mi_tsource';
+const PARAM = "T-source";
+const STORAGE_KEY = "mi_tsource";
 
 // Única definición de la campaña n1 en todo el proyecto
-export const CAMPAIGN_N1 = 'camp_n1';
+export const CAMPAIGN_N1 = "camp_n1";
 
 const normalize = (value: string | null): string | null => {
   const v = value?.trim().toLowerCase();
@@ -44,7 +44,7 @@ const resolveSource = (): string | null => {
     writeStorage(fromUrl);
     return fromUrl;
   }
-  if (window.location.pathname === '/') {
+  if (window.location.pathname === "/") {
     writeStorage(null);
     return null;
   }

@@ -1,23 +1,28 @@
 // BUSCA IMÁGENES en src/assets/icons/ (planes y ventajas)
 // y en src/assets/logos/ (logos de canales)
 
-const icons = import.meta.glob('../assets/icons/*.{png,svg,jpg,webp}', {
+const icons = import.meta.glob("../assets/icons/*.{png,svg,jpg,webp}", {
   eager: true,
-  query: '?url',
-  import: 'default',
+  query: "?url",
+  import: "default",
 }) as Record<string, string>;
 
-const logos = import.meta.glob('../assets/logos/*.{png,svg,jpg,webp}', {
+const logos = import.meta.glob("../assets/logos/*.{png,svg,jpg,webp}", {
   eager: true,
-  query: '?url',
-  import: 'default',
+  query: "?url",
+  import: "default",
 }) as Record<string, string>;
 
-function findSrc(files: Record<string, string>, name: string): string | undefined {
+function findSrc(
+  files: Record<string, string>,
+  name: string,
+): string | undefined {
   const entry = Object.entries(files).find(([path]) => {
-    const file = path.split('/').pop() ?? '';
-    return file.replace(/\.(png|svg|jpg|webp)$/, '') === name;
+    const file = path.split("/").pop() ?? "";
+    const fileName = file.replace(/\.(png|svg|jpe?g|webp)$/i, "");
+    return fileName === name;
   });
+
   return entry?.[1];
 }
 
@@ -26,5 +31,5 @@ export function getIconSrc(name: string) {
 }
 
 export function getLogoSrc(name: string) {
-  return findSrc(logos, name);
+  return findSrc(icons, name) ?? findSrc(logos, name);
 }

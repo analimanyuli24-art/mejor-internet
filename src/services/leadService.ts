@@ -1,18 +1,18 @@
-import axios from 'axios';
-import type { LeadData, LeadResult } from '../types/lead.types';
-import { isCampaignN1, CAMPAIGN_N1 } from './trafficSource';
+import axios from "axios";
+import type { LeadData, LeadResult } from "../types/lead.types";
+import { isCampaignN1, CAMPAIGN_N1 } from "./trafficSource";
 
-const IP_ENDPOINT = 'https://api.ipify.org?format=json';
+const IP_ENDPOINT = "https://api.ipify.org?format=json";
 
-const QUEUE_PRINCIPAL = '263'; // mejor-internet(callme)
-const QUEUE_N1 = '264';        // mejor-internetN1(callme)
+const QUEUE_PRINCIPAL = "263"; // mejor-internet(callme)
+const QUEUE_N1 = "264"; // mejor-internetN1(callme)
 
 async function getClientIp(): Promise<string> {
   try {
     const { data } = await axios.get<{ ip: string }>(IP_ENDPOINT);
-    return data.ip ?? '';
+    return data.ip ?? "";
   } catch {
-    return '';
+    return "";
   }
 }
 
@@ -28,19 +28,21 @@ export async function sendLead(data: LeadData): Promise<LeadResult> {
     const queueId = isCampaignN1() ? QUEUE_N1 : QUEUE_PRINCIPAL;
 
     await axios.post(
-      'https://crm.develz.com:4004/call-me',
+      "https://crm.develz.com:4004/call-me",
       { queueId, number: data.phone, ip },
-      { headers: { 'X-URL-Complete': getCompleteUrl() } },
+      { headers: { "X-URL-Complete": getCompleteUrl() } },
     );
 
     return { ok: true };
   } catch (error) {
-    const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+    const status = axios.isAxiosError(error)
+      ? error.response?.status
+      : undefined;
     return {
       ok: false,
       message: status
         ? `Error del servidor (${status})`
-        : 'No se pudo conectar. Intenta de nuevo.',
+        : "No se pudo conectar. Intenta de nuevo.",
     };
   }
 }

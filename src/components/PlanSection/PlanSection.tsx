@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { plansTabs } from '../../data/plansData';
-import type { PlanCategory } from '../../types/content.types';
-import PlanTabs from './PlanTabs';
-import PlanCard from './PlanCard';
+import { useState } from "react";
+import { plansTabs } from "../../data/plansData";
+import type { PlanCategory } from "../../types/content.types";
+import PlanTabs from "./PlanTabs";
+import PlanCard from "./PlanCard";
 
 function PlanSection() {
   const [activeId, setActiveId] = useState<PlanCategory>(plansTabs[0].id);
   const [cardIndex, setCardIndex] = useState(0);
-  const activeTab = plansTabs.find((tab) => tab.id === activeId) ?? plansTabs[0];
+  const activeTab =
+    plansTabs.find((tab) => tab.id === activeId) ?? plansTabs[0];
   const total = activeTab.plans.length;
 
   const handleTab = (id: PlanCategory) => {
@@ -29,11 +30,11 @@ function PlanSection() {
       </div>
 
       <div key={activeTab.id} className="relative mt-8 md:mt-[3.5vw]">
-                  <div className="grid grid-cols-1 auto-rows-fr gap-6 animate-[modal-in_0.4s_ease-out] md:grid-cols-3 md:gap-[min(1.5vw,20px)] lg:grid-cols-[repeat(3,490px)] lg:justify-center lg:gap-[60px] pointer-coarse:lg:grid-cols-[repeat(3,minmax(0,1fr))]! pointer-coarse:lg:gap-[min(2vw,32px)]!">
+        <div className="grid grid-cols-1 auto-rows-fr gap-6 animate-[modal-in_0.4s_ease-out] md:grid-cols-3 md:gap-[min(1.5vw,20px)] lg:grid-cols-[repeat(3,490px)] lg:justify-center lg:gap-[60px] pointer-coarse:lg:grid-cols-[repeat(3,minmax(0,1fr))]! pointer-coarse:lg:gap-[min(2vw,32px)]!">
           {activeTab.plans.map((plan, index) => (
             <div
               key={plan.id}
-              className={`${index === cardIndex ? 'flex' : 'hidden'} mx-auto w-[60%] md:flex md:mx-0 md:w-full`}
+              className={`${index === cardIndex ? "flex" : "hidden"} mx-auto w-[60%] md:flex md:mx-0 md:w-full`}
             >
               <PlanCard plan={plan} />
             </div>
