@@ -5,6 +5,7 @@ import SuccessMessage from '../CallRequest/SuccessMessage';
 import LegalLinks from '../legal/LegalLinks';
 import botonSolicitar from '../../assets/images/badge-movil1.png';
 import {getDisplayPhone,getPhoneLink,} from '../../services/contactPhone';
+import { trackFormSubmit } from '../../services/tracking';
 
 function HeroLeadForm() {
   const [phone, setPhone] = useState('');
@@ -17,8 +18,10 @@ function HeroLeadForm() {
   const formatPhone = (digits: string) =>
     digits.replace(/\D/g, '').slice(0, 9).replace(/(\d{3})(?=\d)/g, '$1 ');
 
-  const handleSubmit = async () => {
-    if (loading) return;
+  const canSubmit = isValidPhone(phone) && accepted;
+
+    const handleSubmit = async () => {
+    if (loading) return; // Evita clics repetidos y eventos duplicados
     if (!isValidPhone(phone)) return setError('Ingresa un número de 9 dígitos.');
     if (!accepted) return setError('Debes aceptar los Términos y Condiciones y la Política de Privacidad.');
 
@@ -27,15 +30,20 @@ function HeroLeadForm() {
     setLoading(true);
     try {
       const result = await sendLead({ phone, acceptedPrivacy: accepted, source: 'hero' });
-      if (result.ok) setSent(true);
-      else setFailed(true);
+      
+      if (result.ok) {
+        // AQUÍ SE DISPARA EL EVENTO PERSONALIZADO TRAS LA CONFIRMACIÓN DE LA API
+        trackFormSubmit('hero');
+        setSent(true);
+      } else {
+        setFailed(true);
+      }
     } catch {
       setFailed(true);
     } finally {
       setLoading(false);
     }
   };
-
   const handleClose = () => {
     setSent(false);
     setPhone('');
@@ -95,8 +103,13 @@ function HeroLeadForm() {
         <button
           type="button"
           onClick={handleSubmit}
-          disabled={loading}
-          className="relative mx-auto -mt-1 block w-[55%] transition duration-150 ease-out active:scale-90 active:brightness-75 disabled:cursor-wait disabled:opacity-80 md:mt-[0.9vw] md:w-[80%] md:hover:scale-105 md:max-lg:mt-[0.8vw] md:max-lg:w-[46%] lg:-mt-[0.5vw] lg:w-[68%]"
+          disabled={loading || !canSubmit}
+          aria-disabled={loading || !canSubmit}
+          className={`relative mx-auto -mt-1 block w-[55%] transition duration-150 ease-out md:mt-[0.9vw] md:w-[80%] md:max-lg:mt-[0.8vw] md:max-lg:w-[46%] lg:-mt-[0.5vw] lg:w-[68%] ${
+            canSubmit
+              ? 'active:scale-90 active:brightness-75 md:hover:scale-105 disabled:cursor-wait disabled:opacity-80'
+              : 'cursor-not-allowed opacity-50'
+          }`}
         >
           <img src={botonSolicitar} alt="Solicitar llamada" className="block h-auto w-full" />
           {loading && (

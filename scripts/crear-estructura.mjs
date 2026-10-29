@@ -1,7 +1,3 @@
-// Crea la estructura de archivos del proyecto (sin tocar los que ya existen)
-// y muestra el árbol en la terminal.
-// Uso: npm run estructura
-
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 

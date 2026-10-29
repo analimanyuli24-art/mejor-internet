@@ -5,20 +5,24 @@ import { legalDocs, type LegalKey } from '../../data/legalData';
 import footerLogo from '../../assets/logos/logo-mejor-internet-white.png';
 import { sendLead, isValidPhone } from '../../services/leadService';
 import LegalModal from './LegalModal';
+import { trackFormSubmit } from '../../services/tracking';
 
 function Footer() {
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   const [legal, setLegal] = useState<LegalKey | null>(null);
 
-  const handleCall = async () => {
+    const handleCall = async () => {
     if (!isValidPhone(phone)) {
       setMessage('Ingresa un número de 9 dígitos.');
       return;
     }
     const result = await sendLead({ phone, acceptedPrivacy: true, source: 'footer' });
     setMessage(result.ok ? 'Gracias, te llamaremos pronto.' : 'No se pudo enviar. Intenta de nuevo.');
-    if (result.ok) setPhone('');
+    if (result.ok) {
+      trackFormSubmit('footer');
+      setPhone('');
+    }
   };
 
   const openLegal = (e: MouseEvent<HTMLAnchorElement>, index: number) => {

@@ -4,6 +4,7 @@ import Button from '../ui/Button';
 import SuccessMessage from './SuccessMessage';
 import LegalLinks from '../legal/LegalLinks';
 import {getDisplayPhone,getPhoneLink,} from '../../services/contactPhone';
+import { trackFormSubmit } from '../../services/tracking';
 
 interface CallRequestModalProps {
   isOpen: boolean;
@@ -27,7 +28,9 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
     setPhone(value.replace(/\D/g, '').slice(0, 9));
   };
 
-  const handleSubmit = async () => {
+  const canSubmit = isValidPhone(phone) && accepted;
+
+    const handleSubmit = async () => {
     if (loading) return;
     if (!isValidPhone(phone)) return setError('Ingresa un número de 9 dígitos.');
     if (!accepted) return setError('Debes aceptar los Términos y Condiciones y la Política de Privacidad.');
@@ -37,8 +40,14 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
     setLoading(true);
     try {
       const result = await sendLead({ phone, acceptedPrivacy: accepted, source: 'plan-modal', planId });
-      if (result.ok) setSent(true);
-      else setFailed(true);
+      
+      if (result.ok) {
+        // EVENTO TRAS RESPUESTA EXITOSA DE LA API
+        trackFormSubmit('plan-modal');
+        setSent(true);
+      } else {
+        setFailed(true);
+      }
     } catch {
       setFailed(true);
     } finally {
@@ -125,8 +134,11 @@ function CallRequestModal({ isOpen, planId, onClose }: CallRequestModalProps) {
               <Button
                 variant="light"
                 size="sm"
-                className={`transition duration-150 active:scale-90 active:brightness-90 md:px-10 md:py-3 md:text-lg lg:px-8 lg:py-2 lg:text-[15px] ${
-                  loading ? 'pointer-events-none opacity-80' : ''
+                disabled={loading || !canSubmit}
+                className={`transition duration-150 md:px-10 md:py-3 md:text-lg lg:px-8 lg:py-2 lg:text-[15px] ${
+                  !canSubmit
+                    ? 'pointer-events-none cursor-not-allowed opacity-50'
+                    : `active:scale-90 active:brightness-90 ${loading ? 'pointer-events-none opacity-80' : ''}`
                 }`}
                 onClick={handleSubmit}
               >
