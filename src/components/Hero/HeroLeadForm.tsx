@@ -6,6 +6,7 @@ import LegalLinks from '../legal/LegalLinks';
 import botonSolicitar from '../../assets/images/badge-movil1.png';
 import {getDisplayPhone,getPhoneLink,} from '../../services/contactPhone';
 import { trackFormSubmit } from '../../services/tracking';
+import ErrorModal from '../CallRequest/ErrorModal';
 
 function HeroLeadForm() {
   const [phone, setPhone] = useState('');
@@ -181,25 +182,8 @@ function HeroLeadForm() {
                 ✕
               </button>
 
-              <h3 className="flex items-center justify-center gap-3 whitespace-nowrap text-2xl font-bold leading-tight md:text-4xl">
-                <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0 md:h-9 md:w-9" aria-hidden="true">
-                  <circle cx="12" cy="12" r="12" fill="#ef4444" />
-                  <path
-                    d="M8 8l8 8M16 8l-8 8"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                </svg>
-                Ocurrió un error
-              </h3>
+             <ErrorModal isOpen={failed} onClose={() => setFailed(false)} />
 
-              <p className="mx-auto mt-3 text-xs leading-snug md:mt-4 md:text-base">
-                No pudimos enviar tu solicitud.
-                <br />
-                Por favor, vuelve a intentarlo.
-              </p>
 
               <button
                 type="button"
