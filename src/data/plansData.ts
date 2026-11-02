@@ -5,7 +5,7 @@ import type { PlanCardData, PlanCategory } from '../types/content.types';
 
 export interface PlanTab {
   id: PlanCategory;
-  label: string;             // texto de la pastilla: INTERNET / INTERNET+TV / MÓVIL
+  label: string;             
   plans: PlanCardData[];
 }
 
