@@ -138,20 +138,20 @@ function Footer() {
         </div>
       </div>
 
-            {/* FRANJA NEGRA: GRANDE, BIEN PROPORCIONADA Y UNIDA */}
-      <div className="w-full bg-black py-4 md:py-5 lg:py-6">
-        <div className="flex items-center justify-center gap-2.5 md:gap-3">
-          <img
-            src={iconoIsotipo}
-            alt="Dacar Telecom"
-            className="h-6 w-auto object-contain md:h-8 lg:h-12 translate-x-4"
-          />
-          <span className="h-5 w-[1.5px] bg-white/60 md:h-7 lg:h-9" aria-hidden="true" />
-          <span className="text-xs font-semibold tracking-normal text-white md:text-base lg:text-[22px]">
-            Distribuidor Autorizado de Claro
-          </span>
-        </div>
-      </div>
+       {/* FRANJA NEGRA: COMPACTA */}
+<div className="w-full bg-black py-2 md:py-2.5 lg:py-2">
+  <div className="flex items-center justify-center gap-1.5 md:gap-2">
+    <img
+      src={iconoIsotipo}
+      alt="Dacar Telecom"
+      className="h-3 w-auto object-contain md:h-4 lg:h-7 translate-x-2"
+    />
+    <span className="h-2.5 w-[1px] bg-white/60 md:h-3.5 lg:h-[18px]" aria-hidden="true" />
+    <span className="text-[10px] font-semibold tracking-normal text-white md:text-sm lg:text-[13px]">
+      Distribuidor Autorizado de Claro
+    </span>
+  </div>
+</div>
 
       {/* Modales existentes */}
       {legal &&
