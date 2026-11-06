@@ -15,14 +15,14 @@ export const heroData = {
 
 export const introData = {
   title: 'TARIFAS SECRETAS PARA QUIEN DECIDE CAMBIAR.',
-  text: 'Deja de pagar de más por tu internet de casa o línea móvil. Filtramos las mejores opciones del mercado peruano para que empieces a ahorrar hoy.',
+  text: 'Deja de pagar de más por tu internet de casa o línea móvil. Accede a tarifas preferenciales y empieza a ahorrar hoy.',
 };
 
 export const footerData = {
-  companyName: 'DACARTELECOM S.A.C',
+  companyName: 'DACARTELECOM S.A.C | RUC N.º 20535979121',
   legalLinks: [
     {
-      label: 'TÉRMINOS Y CONDICIONES',
+      label: 'AVISO LEGAL',
       href: '#',
     },
     {

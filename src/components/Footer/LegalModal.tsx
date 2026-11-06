@@ -14,9 +14,10 @@ const linkClass =
 const boldPhrases = [
   'DACARTELECOM S.A.C.',
   'Ley N.º 29733 – Ley de Protección de Datos Personales',
+  'América Móvil Perú S.A.C.',
+  'Claro Perú',
 ];
 
-// Textos que se convertirán en enlaces.
 const linkPhrases = [
   'www.mejorinternetperu.com',
   'marketing@dacartelecom.com',

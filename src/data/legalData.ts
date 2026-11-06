@@ -70,7 +70,7 @@ const privacyBlocks: LegalBlock[] = [
   { t: 'p', x: 'Los datos personales cuyo tratamiento nos haya encomendado podrán ser transmitidos a las siguientes entidades:' },
   { t: 'li', x: 'Empresas vinculadas a DACARTELECOM, principalmente con finalidades de reporte interno.' },
   { t: 'li', x: 'PROVEEDORES involucrados en distribuir los productos y servicios que ha solicitado o usado.' },
-  { t: 'li', x: 'Compañías que DACARTELECOM ha contratado o con las que colabora para la prestación de los servicios.' },
+  { t: 'li', x: 'Compañías que han contratado a DACARTELECOM o con las que colabora para la prestación de sus servicios, como lo es el caso de la empresa América Móvil Perú S.A.C., representante de la marca Claro Perú.' },
   { t: 'li', x: 'Agencias de referencias crediticias, prevención de fraude o calificación de negocios, o cualquier otro tipo de agencias de calificación del crédito.' },
   { t: 'li', x: 'ADMINISTRACIONES PÚBLICAS ESTATALES, AUTONÓMICAS O LOCALES u otro tipo de autoridades en caso de cumplimiento de obligación o autorización legal.' },
   { t: 'li', x: 'Terceros donde una divulgación de este tipo sea necesaria para cumplir con la ley aplicable u otros requisitos legales o judiciales.' },

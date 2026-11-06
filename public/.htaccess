@@ -1,0 +1,30 @@
+# ==============================================================
+# CONFIGURACIÓN SEGURA PARA SPA REACT + GOOGLE ADS
+# ==============================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Permitir acceso directo a robots.txt y sitemap.xml
+  RewriteRule ^robots\.txt$ - [L]
+  RewriteRule ^sitemap\.xml$ - [L]
+
+  # Si el archivo o carpeta física existe (CSS, JS, imágenes), servirlo directamente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Para todas las demás rutas y parámetros (ej. ?T-source=camp_n1), enviar a index.html (HTTP 200 OK)
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
+# Habilitar compresión para que Google mida alta velocidad de carga
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Encabezados de seguridad sin bloquear rastreadores de Google
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>

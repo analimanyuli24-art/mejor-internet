@@ -1,0 +1,34 @@
+# ==============================================================
+# PERMISOS OFICIALES PARA GOOGLEBOT Y ADSBOT-GOOGLE
+# Mejor Internet Perú
+# ==============================================================
+
+# 1. RASTREADORES OFICIALES DE GOOGLE ADS (Auditoría de anuncios y calidad)
+User-agent: AdsBot-Google
+Allow: /
+Allow: /*?*
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+Allow: /*?*
+
+# 2. RASTREADOR PRINCIPAL DE GOOGLE (Búsqueda e indexación)
+User-agent: Googlebot
+Allow: /
+Allow: /*?*
+
+User-agent: Googlebot-Image
+Allow: /
+
+# 3. PERMITIR RECURSOS ESTÁTICOS (Esencial para que Google renderice el CSS/JS)
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
+
+# 4. RUTA DEL SITEMAP
+Sitemap: https://mejorinternetperu.com/sitemap.xml
